@@ -24,48 +24,24 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
         
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* 卡片風格定義 */
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
         .flight-card { background: linear-gradient(135deg, #3E3A35 0%, #5d5045 100%); color: #F8F4E3; box-shadow: 0 15px 30px -10px rgba(62, 58, 53, 0.6); border: 1px solid rgba(197, 165, 114, 0.1); }
         .sushi-card { background: #151515; color: #e6cda3; border: 1px solid #333; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
         .snoopy-card { background: #fffbf0; border: 2px dashed #8b5e3c; color: #5d4037; }
         .bus-card { background: linear-gradient(135deg, #2c5ea8 0%, #1e4079 100%); color: white; box-shadow: 0 10px 20px -5px rgba(44, 94, 168, 0.4); border-left: 5px solid #fbbf24; }
         .rent-card { border-left: 5px solid #eb0a1e; }
-        
-        /* 富士山能見度卡片 */
-        .fuji-forecast-card {
-            background: linear-gradient(to bottom, #3b82f6 0%, #93c5fd 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .fuji-bg {
-            position: absolute;
-            bottom: -10px;
-            right: -20px;
-            font-size: 120px;
-            opacity: 0.2;
-            color: white;
-            transform: rotate(-10deg);
-        }
+        .fuji-forecast-card { background: linear-gradient(to bottom, #3b82f6 0%, #93c5fd 100%); color: white; position: relative; overflow: hidden; }
+        .fuji-bg { position: absolute; bottom: -10px; right: -20px; font-size: 120px; opacity: 0.2; color: white; transform: rotate(-10deg); }
+        .weather-widget { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .page-content, .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
         .page-content.active, .tab-content.active { display: block; }
-        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeUp { 0% { opacity: 0; transform: translate(-50%, 20px); } 20% { opacity: 1; transform: translate(-50%, 0); } 80% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; transform: translate(-50%, -20px); } }
         @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(197, 165, 114, 0.6); } 70% { box-shadow: 0 0 0 8px rgba(197, 165, 114, 0); } 100% { box-shadow: 0 0 0 0 rgba(197, 165, 114, 0); } }
-        
         .toast-msg { animation: fadeUp 2s ease-in-out forwards; }
         .live-indicator { animation: pulse-gold 2s infinite; }
-        
         .date-btn.active { background-color: #2563eb; color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); transform: scale(1.02); }
         .date-btn { background-color: #f3f4f6; color: #9ca3af; transition: all 0.2s; }
     </style>
@@ -76,15 +52,9 @@
         <div class="max-w-md mx-auto px-4 pt-3 pb-2">
             <h1 class="text-lg font-bold text-center text-slate-800 mb-2">東京之旅 2025 🇯🇵</h1>
             <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-1">
-                <button onclick="switchDate('day1')" id="btn-day1" class="date-btn active flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[90px] whitespace-nowrap">
-                    <div class="text-[10px] opacity-80 font-normal">Day 1</div><div>12/05</div>
-                </button>
-                <button onclick="switchDate('day2')" id="btn-day2" class="date-btn flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[90px] whitespace-nowrap">
-                    <div class="text-[10px] opacity-80 font-normal">Day 2</div><div>12/06</div>
-                </button>
-                <button onclick="switchDate('day3')" id="btn-day3" class="date-btn flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[90px] whitespace-nowrap">
-                    <div class="text-[10px] opacity-80 font-normal">Day 3</div><div>12/07</div>
-                </button>
+                <button onclick="switchDate('day1')" id="btn-day1" class="date-btn active flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[90px] whitespace-nowrap"><div class="text-[10px] opacity-80 font-normal">Day 1</div><div>12/05</div></button>
+                <button onclick="switchDate('day2')" id="btn-day2" class="date-btn flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[90px] whitespace-nowrap"><div class="text-[10px] opacity-80 font-normal">Day 2</div><div>12/06</div></button>
+                <button onclick="switchDate('day3')" id="btn-day3" class="date-btn flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[90px] whitespace-nowrap"><div class="text-[10px] opacity-80 font-normal">Day 3</div><div>12/07</div></button>
             </div>
         </div>
     </div>
@@ -92,19 +62,25 @@
     <div class="max-w-md mx-auto px-4 py-4 min-h-[80vh]">
 
         <div id="view-day1" class="page-content active space-y-6">
+            <div class="weather-widget rounded-xl p-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="text-2xl" id="icon-tokyo">⏳</div>
+                    <div><div class="font-bold text-sm text-gray-800">Tokyo</div><div class="text-xs text-gray-500" id="desc-tokyo">Loading...</div></div>
+                </div>
+                <div class="text-right"><div class="font-bold text-lg text-gray-800" id="temp-tokyo">--°</div></div>
+            </div>
+
             <div class="flex gap-4">
                 <div class="flex flex-col items-center"><div class="w-2 h-2 rounded-full bg-gray-300 mt-2"></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div>
                 <div class="glass-card flex-1 rounded-2xl p-4">
                     <div class="flex justify-between items-start mb-2"><span class="text-lg font-bold text-blue-900">06:00</span><i class="fas fa-car text-gray-400"></i></div>
-                    <h3 class="font-bold text-gray-800">出發前往機場</h3>
-                    <p class="text-sm text-gray-500 mt-1">哥哥載媽媽 -> 台北車站</p>
+                    <h3 class="font-bold text-gray-800">出發前往機場</h3><p class="text-sm text-gray-500 mt-1">哥哥載媽媽 -> 台北車站</p>
                     <div class="mt-3 flex items-center gap-2 text-xs text-blue-700 bg-blue-50 p-2 rounded-lg border border-blue-100"><i class="fas fa-subway"></i><span>轉乘機場捷運 -> 第一航廈</span></div>
                 </div>
             </div>
             <div class="flex gap-4">
                 <div class="flex flex-col items-center"><div class="w-3 h-3 rounded-full bg-[#C5A572] ring-4 ring-amber-50 mt-2"></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div>
                 <div class="flight-card flex-1 rounded-2xl p-5 relative overflow-hidden">
-                    <i class="fas fa-plane absolute -right-6 -bottom-6 text-[10rem] text-[#C5A572] opacity-10 rotate-12 pointer-events-none"></i>
                     <div class="relative z-10">
                         <div class="flex justify-between items-start mb-6 border-b border-[#C5A572]/30 pb-3">
                             <div class="flex flex-col gap-2"><span class="font-mono font-bold tracking-wider text-2xl text-starlux-cream">JX802</span><a href="https://www.flightradar24.com/data/flights/jx802" target="_blank" class="live-indicator w-fit flex items-center gap-1 text-[10px] bg-[#C5A572] text-starlux-dark font-bold px-3 py-1 rounded-full shadow-sm"><i class="fas fa-satellite-dish text-[9px]"></i> TRACK</a></div>
@@ -148,9 +124,17 @@
         </div>
 
         <div id="view-day2" class="page-content space-y-6">
+            <div class="weather-widget rounded-xl p-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="text-2xl" id="icon-tokyo-2">⏳</div>
+                    <div><div class="font-bold text-sm text-gray-800">Tokyo</div><div class="text-xs text-gray-500" id="desc-tokyo-2">Loading...</div></div>
+                </div>
+                <div class="text-right"><div class="font-bold text-lg text-gray-800" id="temp-tokyo-2">--°</div></div>
+            </div>
+
             <div class="bg-gray-200 p-1 rounded-xl flex text-sm font-medium">
-                <button onclick="switchTab('brother')" id="tab-brother" class="flex-1 py-2 rounded-lg bg-white text-indigo-600 shadow-sm transition-all flex items-center justify-center gap-2"><i class="fas fa-male"></i> 哥哥 (移動)</button>
-                <button onclick="switchTab('mom')" id="tab-mom" class="flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-700 transition-all flex items-center justify-center gap-2"><i class="fas fa-female"></i> 媽媽 (史努比)</button>
+                <button onclick="switchTab('brother')" id="tab-brother" class="flex-1 py-2 rounded-lg bg-white text-indigo-600 shadow-sm transition-all">哥哥 (移動)</button>
+                <button onclick="switchTab('mom')" id="tab-mom" class="flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-700 transition-all">媽媽 (史努比)</button>
             </div>
             <div id="content-brother" class="tab-content active space-y-6">
                 <div class="glass-card rounded-2xl p-4 border-l-4 border-indigo-500">
@@ -200,13 +184,8 @@
             <div id="content-mom" class="tab-content space-y-6">
                 <div class="snoopy-card rounded-2xl p-5 relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 text-8xl opacity-10 rotate-12 text-[#8b5e3c]"><i class="fas fa-dog"></i></div>
-                    <div class="flex justify-between items-start mb-3 relative z-10">
-                        <span class="bg-[#8b5e3c] text-white text-xs font-bold px-2 py-1 rounded">10:00 開館</span>
-                        <a href="https://snoopymuseum.tokyo/" target="_blank" class="text-xs font-bold underline text-[#8b5e3c]">官網</a>
-                    </div>
-                    <h3 class="text-xl font-bold text-[#5d4037] mb-1">史努比博物館</h3>
-                    <p class="text-sm text-[#8b5e3c] opacity-80 mb-3">Snoopy Museum Tokyo</p>
-                    <p class="text-sm leading-relaxed border-t border-[#8b5e3c]/20 pt-2"><i class="fas fa-map-marker-alt mr-1"></i> 就在飯店隔壁，步行可達。</p>
+                    <div class="flex justify-between items-start mb-3 relative z-10"><span class="bg-[#8b5e3c] text-white text-xs font-bold px-2 py-1 rounded">10:00 開館</span><a href="https://snoopymuseum.tokyo/" target="_blank" class="text-xs font-bold underline text-[#8b5e3c]">官網</a></div>
+                    <h3 class="text-xl font-bold text-[#5d4037] mb-1">史努比博物館</h3><p class="text-sm text-[#8b5e3c] opacity-80 mb-3">Snoopy Museum Tokyo</p><p class="text-sm leading-relaxed border-t border-[#8b5e3c]/20 pt-2"><i class="fas fa-map-marker-alt mr-1"></i> 就在飯店隔壁，步行可達。</p>
                 </div>
                 <div class="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm">
                     <div class="flex items-center gap-2 mb-4"><div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center"><i class="fas fa-train"></i></div><div><h3 class="font-bold text-gray-800">前往潮見王子飯店</h3><p class="text-xs text-gray-500">避開東京站迷宮路線</p></div></div>
@@ -221,44 +200,35 @@
             </div>
             <div class="relative py-4"><div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-300"></div></div><div class="relative flex justify-center"><span class="bg-slate-50 px-4 text-sm text-gray-500 font-bold"><i class="fas fa-handshake mr-2"></i>傍晚會合</span></div></div>
             <div class="glass-card rounded-2xl p-4 border-l-4 border-orange-400">
-                <div class="flex justify-between items-start">
-                    <div><h3 class="font-bold text-gray-800">東京灣潮見王子大飯店</h3><p class="text-xs text-gray-500 mt-1">Tokyo Bay Shiomi Prince Hotel</p></div>
-                    <div class="bg-orange-100 text-orange-600 p-2 rounded-lg text-xs font-bold flex flex-col items-center"><i class="fas fa-suitcase"></i><span>放行李</span></div>
-                </div>
+                <div class="flex justify-between items-start"><div><h3 class="font-bold text-gray-800">東京灣潮見王子大飯店</h3><p class="text-xs text-gray-500 mt-1">Tokyo Bay Shiomi Prince Hotel</p></div><div class="bg-orange-100 text-orange-600 p-2 rounded-lg text-xs font-bold flex flex-col items-center"><i class="fas fa-suitcase"></i><span>放行李</span></div></div>
             </div>
             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-4 shadow-lg">
                 <div class="absolute top-0 right-0 p-4 opacity-20 text-4xl"><i class="fas fa-snowflake"></i></div>
-                <div class="flex justify-between items-start relative z-10">
-                    <div><div class="text-xs bg-white/20 px-2 py-0.5 rounded w-fit mb-1">如有時間</div><h3 class="font-bold text-lg text-blue-100">六本木 冬季點燈</h3></div>
-                    <div class="text-right"><div class="text-xl font-bold">17:00</div><div class="text-xs opacity-70">|</div><div class="text-xl font-bold">23:00</div></div>
-                </div>
+                <div class="flex justify-between items-start relative z-10"><div><div class="text-xs bg-white/20 px-2 py-0.5 rounded w-fit mb-1">如有時間</div><h3 class="font-bold text-lg text-blue-100">六本木 冬季點燈</h3></div><div class="text-right"><div class="text-xl font-bold">17:00</div><div class="text-xs opacity-70">|</div><div class="text-xl font-bold">23:00</div></div></div>
             </div>
             <div class="sushi-card rounded-2xl p-5 shadow-2xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#e6cda3]/20 to-transparent rounded-bl-full"></div>
-                <div class="flex justify-between items-center mb-4 border-b border-[#e6cda3]/30 pb-3">
-                    <span class="text-xs font-serif tracking-[0.2em] uppercase text-[#e6cda3]/80">Reservation</span>
-                    <span class="text-xl font-bold text-[#e6cda3]">19:45</span>
-                </div>
+                <div class="flex justify-between items-center mb-4 border-b border-[#e6cda3]/30 pb-3"><span class="text-xs font-serif tracking-[0.2em] uppercase text-[#e6cda3]/80">Reservation</span><span class="text-xl font-bold text-[#e6cda3]">19:45</span></div>
                 <h2 class="text-2xl font-serif font-bold mb-1 text-white">鮨 麻布</h2>
-                <div class="flex items-center gap-4 text-sm mt-2 mb-5">
-                    <div class="flex items-center gap-1 text-yellow-500"><i class="fas fa-star"></i><span class="font-bold text-white text-lg">3.54</span></div>
-                </div>
+                <div class="flex items-center gap-4 text-sm mt-2 mb-5"><div class="flex items-center gap-1 text-yellow-500"><i class="fas fa-star"></i><span class="font-bold text-white text-lg">3.54</span></div></div>
                 <div class="bg-[#333]/50 rounded-xl p-4 border border-[#e6cda3]/20 space-y-3">
-                     <div class="flex justify-between items-center pb-3 border-b border-[#e6cda3]/20">
-                         <div><div class="text-[10px] text-[#e6cda3]/60 uppercase tracking-widest">Confirmation ID</div><div class="font-mono text-xl font-bold text-[#e6cda3]">P6GKCD</div></div>
-                         <button onclick="copyCode('P6GKCD')" class="w-8 h-8 rounded-full bg-[#e6cda3]/20 text-[#e6cda3] flex items-center justify-center hover:bg-[#e6cda3] hover:text-black transition"><i class="far fa-copy"></i></button>
-                     </div>
-                     <div class="grid grid-cols-2 gap-3 text-sm">
-                         <div><span class="text-[10px] text-[#e6cda3]/60 block uppercase">Name</span><span class="text-white font-medium text-xs">キュウ ボクケン</span></div>
-                         <div><span class="text-[10px] text-[#e6cda3]/60 block uppercase">Guests</span><span class="text-white font-medium">2位 (Family)</span></div>
-                         <div class="col-span-2"><span class="text-[10px] text-[#e6cda3]/60 block uppercase">Seat Type</span><div class="flex items-center gap-2 text-white"><i class="fas fa-chair text-[#e6cda3] text-xs"></i><span>Counter (板前座位)</span></div></div>
-                     </div>
+                     <div class="flex justify-between items-center pb-3 border-b border-[#e6cda3]/20"><div><div class="text-[10px] text-[#e6cda3]/60 uppercase tracking-widest">Confirmation ID</div><div class="font-mono text-xl font-bold text-[#e6cda3]">P6GKCD</div></div><button onclick="copyCode('P6GKCD')" class="w-8 h-8 rounded-full bg-[#e6cda3]/20 text-[#e6cda3] flex items-center justify-center hover:bg-[#e6cda3] hover:text-black transition"><i class="far fa-copy"></i></button></div>
+                     <div class="grid grid-cols-2 gap-3 text-sm"><div><span class="text-[10px] text-[#e6cda3]/60 block uppercase">Name</span><span class="text-white font-medium text-xs">キュウ ボクケン</span></div><div><span class="text-[10px] text-[#e6cda3]/60 block uppercase">Guests</span><span class="text-white font-medium">2位 (Family)</span></div><div class="col-span-2"><span class="text-[10px] text-[#e6cda3]/60 block uppercase">Seat Type</span><div class="flex items-center gap-2 text-white"><i class="fas fa-chair text-[#e6cda3] text-xs"></i><span>Counter (板前座位)</span></div></div></div>
                 </div>
                 <a href="https://maps.google.com/?q=Sushi+Azabu+Tokyo" target="_blank" class="mt-5 w-full py-2 border border-[#e6cda3]/50 text-[#e6cda3] text-sm rounded flex items-center justify-center hover:bg-[#e6cda3] hover:text-black transition">查看位置</a>
             </div>
         </div>
 
         <div id="view-day3" class="page-content space-y-6">
+            
+            <div class="weather-widget rounded-xl p-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="text-2xl" id="icon-fuji">⏳</div>
+                    <div><div class="font-bold text-sm text-gray-800">Kawaguchiko</div><div class="text-xs text-gray-500" id="desc-fuji">Loading...</div></div>
+                </div>
+                <div class="text-right"><div class="font-bold text-lg text-gray-800" id="temp-fuji">--°</div></div>
+            </div>
+
             <div class="flex gap-4">
                 <div class="flex flex-col items-center"><div class="w-2 h-2 rounded-full bg-gray-300 mt-2"></div><div class="w-0.5 h-full bg-gray-200 my-1"></div></div>
                 <div class="glass-card flex-1 rounded-2xl p-4">
@@ -270,15 +240,9 @@
                 <div class="absolute -right-2 -top-2 text-6xl text-yellow-500 opacity-10"><i class="fas fa-map-signs"></i></div>
                 <h3 class="font-bold text-yellow-800 mb-2"><i class="fas fa-exclamation-circle mr-1"></i> 東京站採買攻略</h3>
                 <div class="space-y-3">
-                    <div class="flex items-start gap-3 bg-white p-3 rounded-lg shadow-sm">
-                        <span class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mt-0.5 shrink-0">1. 改札內</span>
-                        <div><div class="font-bold text-gray-800">Be! FRUITS SANDWICH</div><div class="text-xs text-gray-500">水果三明治 (先買這個再出站！)</div></div>
-                    </div>
+                    <div class="flex items-start gap-3 bg-white p-3 rounded-lg shadow-sm"><span class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mt-0.5 shrink-0">1. 改札內</span><div><div class="font-bold text-gray-800">Be! FRUITS SANDWICH</div><div class="text-xs text-gray-500">水果三明治 (先買這個再出站！)</div></div></div>
                     <div class="flex justify-center text-gray-400 text-xs"><i class="fas fa-arrow-down"></i> 八重洲口出站</div>
-                    <div class="flex items-start gap-3 bg-white p-3 rounded-lg shadow-sm">
-                        <span class="bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mt-0.5 shrink-0">2. 改札外</span>
-                        <div><div class="font-bold text-gray-800">ROKUMEI COFFEE CO.</div><div class="text-xs text-gray-500">精品咖啡 (買完直接去巴士站)</div></div>
-                    </div>
+                    <div class="flex items-start gap-3 bg-white p-3 rounded-lg shadow-sm"><span class="bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mt-0.5 shrink-0">2. 改札外</span><div><div class="font-bold text-gray-800">ROKUMEI COFFEE CO.</div><div class="text-xs text-gray-500">精品咖啡 (買完直接去巴士站)</div></div></div>
                 </div>
             </div>
             <div class="flex gap-4">
@@ -307,32 +271,14 @@
                 </div>
             </div>
             <div class="glass-card flex-1 rounded-2xl p-4 rent-card mt-4">
-                <div class="flex justify-between items-start mb-3">
-                    <div><h3 class="font-bold text-gray-800 text-lg">Toyota Rent a Car</h3><p class="text-xs text-gray-500">富士河口湖店</p></div>
-                    <span class="bg-[#eb0a1e] text-white text-xs font-bold px-2 py-1 rounded shadow-sm">GR86</span>
-                </div>
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="text-4xl text-[#eb0a1e]"><i class="fas fa-car-side"></i></div>
-                    <div><div class="text-xl font-bold text-gray-800">GR86 (SP1)</div><div class="text-xs text-gray-500">AT車 | 禁煙</div></div>
-                </div>
+                <div class="flex justify-between items-start mb-3"><div><h3 class="font-bold text-gray-800 text-lg">Toyota Rent a Car</h3><p class="text-xs text-gray-500">富士河口湖店</p></div><span class="bg-[#eb0a1e] text-white text-xs font-bold px-2 py-1 rounded shadow-sm">GR86</span></div>
+                <div class="flex items-center gap-4 mb-4"><div class="text-4xl text-[#eb0a1e]"><i class="fas fa-car-side"></i></div><div><div class="text-xl font-bold text-gray-800">GR86 (SP1)</div><div class="text-xs text-gray-500">AT車 | 禁煙</div></div></div>
                 <div class="bg-gray-50 rounded-xl p-3 border border-gray-200 space-y-3">
-                    <div class="flex justify-between text-xs text-gray-600">
-                        <div><div class="font-bold text-gray-400">PICK UP</div><div class="font-bold text-gray-800">12/07 13:00</div></div>
-                        <div class="text-right"><div class="font-bold text-gray-400">RETURN</div><div class="font-bold text-gray-800">12/08 13:00</div></div>
-                    </div>
-                    <div class="flex justify-between items-center pt-2 border-t border-gray-200">
-                        <div><div class="text-[10px] text-gray-400 uppercase">Reservation No.</div><div class="font-mono text-base font-bold text-[#eb0a1e]">98129619200</div></div>
-                        <button onclick="copyCode('98129619200')" class="w-8 h-8 rounded-full bg-red-50 text-[#eb0a1e] flex items-center justify-center hover:bg-red-100 transition"><i class="far fa-copy"></i></button>
-                    </div>
-                    <div class="flex justify-between items-center pt-2 border-t border-gray-200">
-                        <div class="text-[10px] text-gray-400 uppercase">Total Price</div>
-                        <div class="font-bold text-gray-800">¥18,700 <span class="text-[10px] font-normal text-gray-400">(現場刷卡)</span></div>
-                    </div>
+                    <div class="flex justify-between text-xs text-gray-600"><div><div class="font-bold text-gray-400">PICK UP</div><div class="font-bold text-gray-800">12/07 13:00</div></div><div class="text-right"><div class="font-bold text-gray-400">RETURN</div><div class="font-bold text-gray-800">12/08 13:00</div></div></div>
+                    <div class="flex justify-between items-center pt-2 border-t border-gray-200"><div><div class="text-[10px] text-gray-400 uppercase">Reservation No.</div><div class="font-mono text-base font-bold text-[#eb0a1e]">98129619200</div></div><button onclick="copyCode('98129619200')" class="w-8 h-8 rounded-full bg-red-50 text-[#eb0a1e] flex items-center justify-center hover:bg-red-100 transition"><i class="far fa-copy"></i></button></div>
+                    <div class="flex justify-between items-center pt-2 border-t border-gray-200"><div class="text-[10px] text-gray-400 uppercase">Total Price</div><div class="font-bold text-gray-800">¥18,700 <span class="text-[10px] font-normal text-gray-400">(現場刷卡)</span></div></div>
                 </div>
-                <div class="mt-3 flex gap-2">
-                     <a href="tel:0555721100" class="flex-1 bg-green-50 text-green-600 text-xs py-2 rounded border border-green-100 flex items-center justify-center gap-1"><i class="fas fa-phone"></i> 店鋪電話</a>
-                    <button onclick="copyCode('161 273 303*05')" class="flex-1 bg-blue-50 text-blue-600 text-xs py-2 rounded border border-blue-100 flex items-center justify-center gap-1"><i class="fas fa-map-pin"></i> 複製 MapCode</button>
-                </div>
+                <div class="mt-3 flex gap-2"><a href="tel:0555721100" class="flex-1 bg-green-50 text-green-600 text-xs py-2 rounded border border-green-100 flex items-center justify-center gap-1"><i class="fas fa-phone"></i> 店鋪電話</a><button onclick="copyCode('161 273 303*05')" class="flex-1 bg-blue-50 text-blue-600 text-xs py-2 rounded border border-blue-100 flex items-center justify-center gap-1"><i class="fas fa-map-pin"></i> 複製 MapCode</button></div>
                 <a href="./rental.pdf" target="_blank" class="mt-2 block w-full text-center bg-gray-800 text-white text-xs py-2 rounded shadow-sm hover:bg-gray-700 transition"><i class="fas fa-file-pdf mr-1"></i> 查看預約確認單 (PDF)</a>
                 <a href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida0" target="_blank" class="mt-2 block w-full text-center bg-[#eb0a1e] text-white text-xs py-2 rounded shadow-sm hover:bg-red-700 transition"><i class="fas fa-location-arrow mr-1"></i> 導航至租車行</a>
             </div>
@@ -340,44 +286,31 @@
             <div class="fuji-forecast-card rounded-2xl p-5 mt-6 shadow-xl">
                 <i class="fas fa-mountain fuji-bg"></i>
                 <div class="relative z-10 text-center">
-                    <h3 class="text-xl font-bold mb-1">富士山能見度預報</h3>
-                    <p class="text-sm opacity-90 mb-4">Mount Fuji Visibility Index</p>
-                    
-                    <a href="https://fuji-san.info/zh-tw/index.html" target="_blank" class="block w-full bg-white text-blue-600 font-bold py-3 rounded-xl shadow-md hover:bg-blue-50 transition mb-3">
-                        <i class="fas fa-chart-line mr-2"></i> 查看即時指數 (1-10)
-                    </a>
-                    
-                    <a href="https://live.fujigoko.tv/?n=3&t=14&b=&u=&e=&c=" target="_blank" class="inline-block text-xs text-white/80 border-b border-white/50 pb-0.5 hover:text-white hover:border-white transition">
-                        <i class="fas fa-video mr-1"></i> 觀看 Live Cam 實況
-                    </a>
+                    <div class="flex items-center justify-center gap-2 mb-1">
+                        <h3 class="text-xl font-bold">富士山能見度</h3>
+                        <span id="fuji-status-badge" class="text-xs bg-white/20 px-2 py-0.5 rounded">Loading...</span>
+                    </div>
+                    <p class="text-sm opacity-90 mb-4">預測準確率：<span id="fuji-cloud-cover">--%</span> (雲量)</p>
+                    <a href="https://fuji-san.info/zh-tw/index.html" target="_blank" class="block w-full bg-white text-blue-600 font-bold py-3 rounded-xl shadow-md hover:bg-blue-50 transition mb-3"><i class="fas fa-chart-line mr-2"></i> 查看官方指數 (1-10)</a>
+                    <a href="https://live.fujigoko.tv/?n=3&t=14&b=&u=&e=&c=" target="_blank" class="inline-block text-xs text-white/80 border-b border-white/50 pb-0.5 hover:text-white hover:border-white transition"><i class="fas fa-video mr-1"></i> 觀看 Live Cam 實況</a>
                 </div>
             </div>
+
             <div class="bg-white rounded-2xl p-4 shadow-md border border-gray-200 mt-4">
-                <div class="flex justify-between items-start mb-2">
-                    <span class="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-1 rounded">午餐推薦</span>
-                    <div class="text-xs text-gray-400"><i class="fas fa-car mr-1"></i>約 8 分鐘</div>
-                </div>
+                <div class="flex justify-between items-start mb-2"><span class="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-1 rounded">午餐推薦</span><div class="text-xs text-gray-400"><i class="fas fa-car mr-1"></i>約 8 分鐘</div></div>
                 <h3 class="font-bold text-xl text-gray-800 mb-1">ほうとう不動 東恋路店</h3>
                 <p class="text-xs text-gray-500 mb-3">Hoto Fudo (Higashikoiji)</p>
                 <p class="text-sm text-gray-600 leading-relaxed mb-3"><i class="fas fa-camera mr-1 text-gray-400"></i> 必拍！雲朵造型的網美建築。<br><i class="fas fa-utensils mr-1 text-gray-400"></i> 招牌：不動餺飥麵 (自家製麵+味噌南瓜湯頭)。</p>
                 <a href="https://www.google.com/maps/search/?api=1&query=Hoto+Fudo+Higashikoiji" target="_blank" class="block w-full text-center bg-orange-500 text-white text-xs py-2 rounded shadow-sm hover:bg-orange-600 transition"><i class="fas fa-location-arrow mr-1"></i> 導航至餐廳</a>
             </div>
-            
             <div class="flex gap-4 mt-4">
                 <div class="flex flex-col items-center"><div class="w-3 h-3 rounded-full bg-blue-800 ring-4 ring-blue-100 mt-2"></div></div>
                 <div class="glass-card flex-1 rounded-2xl p-4 border-l-4 border-blue-800">
-                    <div class="flex justify-between items-start">
-                        <div><h3 class="font-bold text-lg text-gray-800">河口湖富士倒影 富士吟景</h3><p class="text-xs text-gray-500 mt-1">Fuji Ginkei</p></div>
-                        <div class="bg-blue-50 text-blue-800 p-2 rounded-lg text-xs font-bold flex flex-col items-center"><i class="fas fa-hot-tub"></i><span>Check In</span></div>
-                    </div>
-                    <div class="mt-3 flex items-center justify-between bg-gray-50 p-2 rounded-lg border border-gray-100">
-                        <div class="text-xs text-gray-500">Total Price</div>
-                        <div class="text-sm font-bold text-gray-800">NT$12,765 <span class="text-xs text-gray-400 font-normal">(¥63,650)</span></div>
-                    </div>
+                    <div class="flex justify-between items-start"><div><h3 class="font-bold text-lg text-gray-800">河口湖富士倒影 富士吟景</h3><p class="text-xs text-gray-500 mt-1">Fuji Ginkei</p></div><div class="bg-blue-50 text-blue-800 p-2 rounded-lg text-xs font-bold flex flex-col items-center"><i class="fas fa-hot-tub"></i><span>Check In</span></div></div>
+                    <div class="mt-3 flex items-center justify-between bg-gray-50 p-2 rounded-lg border border-gray-100"><div class="text-xs text-gray-500">Total Price</div><div class="text-sm font-bold text-gray-800">NT$12,765 <span class="text-xs text-gray-400 font-normal">(¥63,650)</span></div></div>
                     <a href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida1" target="_blank" class="mt-3 block w-full text-center bg-blue-800 text-white text-xs py-2 rounded hover:bg-blue-900 transition"><i class="fas fa-map-marker-alt mr-1"></i> 查看飯店位置</a>
                 </div>
             </div>
-            
             <div class="text-center text-xs text-gray-400 mt-8 mb-4"><i class="fas fa-mountain mr-1"></i> Enjoy Fuji View!</div>
         </div>
     </div>
@@ -385,6 +318,79 @@
     <div id="toast-container" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 pointer-events-none z-50 w-max"></div>
 
     <script>
+        // Real-time Weather Logic (Open-Meteo API)
+        async function fetchWeather() {
+            const tokyoUrl = 'https://api.open-meteo.com/v1/forecast?latitude=35.6895&longitude=139.6917&current=temperature_2m,weather_code&timezone=Asia%2FTokyo';
+            const fujiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=35.498&longitude=138.769&current=temperature_2m,weather_code,cloud_cover&timezone=Asia%2FTokyo'; // Kawaguchiko
+
+            try {
+                // 1. Tokyo
+                const resT = await fetch(tokyoUrl);
+                const dataT = await resT.json();
+                const tempT = Math.round(dataT.current.temperature_2m);
+                const codeT = dataT.current.weather_code;
+                updateWeatherUI('tokyo', tempT, codeT);
+                updateWeatherUI('tokyo-2', tempT, codeT); // Day 2 uses same data
+
+                // 2. Fuji (Kawaguchiko)
+                const resF = await fetch(fujiUrl);
+                const dataF = await resF.json();
+                const tempF = Math.round(dataF.current.temperature_2m);
+                const codeF = dataF.current.weather_code;
+                const cloudF = dataF.current.cloud_cover;
+                updateWeatherUI('fuji', tempF, codeF);
+                
+                // Update Fuji Forecast Card
+                updateFujiVisibility(cloudF);
+
+            } catch (e) { console.error("Weather Fetch Error", e); }
+        }
+
+        function updateWeatherUI(id, temp, code) {
+            const iconEl = document.getElementById(`icon-${id}`);
+            const descEl = document.getElementById(`desc-${id}`);
+            const tempEl = document.getElementById(`temp-${id}`);
+            
+            if(iconEl && descEl && tempEl) {
+                tempEl.innerText = `${temp}°`;
+                const info = getWeatherInfo(code);
+                iconEl.innerText = info.icon;
+                descEl.innerText = info.text;
+            }
+        }
+
+        function updateFujiVisibility(cloudCover) {
+            const badge = document.getElementById('fuji-status-badge');
+            const text = document.getElementById('fuji-cloud-cover');
+            if(badge && text) {
+                text.innerText = `${cloudCover}% 雲量`;
+                if(cloudCover < 20) {
+                    badge.innerText = "極佳 ★★★";
+                    badge.className = "text-xs bg-green-500 text-white px-2 py-0.5 rounded font-bold";
+                } else if (cloudCover < 50) {
+                    badge.innerText = "良好 ★★";
+                    badge.className = "text-xs bg-yellow-500 text-white px-2 py-0.5 rounded font-bold";
+                } else {
+                    badge.innerText = "不佳 (雲多)";
+                    badge.className = "text-xs bg-gray-500 text-white px-2 py-0.5 rounded font-bold";
+                }
+            }
+        }
+
+        function getWeatherInfo(code) {
+            // WMO Weather interpretation codes (https://open-meteo.com/en/docs)
+            if (code === 0) return { icon: '☀️', text: 'Clear' };
+            if (code >= 1 && code <= 3) return { icon: '⛅', text: 'Partly Cloudy' };
+            if (code >= 45 && code <= 48) return { icon: '🌫️', text: 'Fog' };
+            if (code >= 51 && code <= 67) return { icon: '🌧️', text: 'Rain' };
+            if (code >= 71 && code <= 77) return { icon: '❄️', text: 'Snow' };
+            return { icon: '🌥️', text: 'Cloudy' };
+        }
+
+        // Initialize
+        fetchWeather();
+
+        // Existing functions
         function switchDate(day) {
             const days = ['day1', 'day2', 'day3'];
             days.forEach(d => {
@@ -395,7 +401,6 @@
             });
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
-
         function switchTab(role) {
             const btnBrother = document.getElementById('tab-brother'); const btnMom = document.getElementById('tab-mom');
             const contentBrother = document.getElementById('content-brother'); const contentMom = document.getElementById('content-mom');
@@ -409,7 +414,6 @@
                 contentMom.classList.add('active'); contentBrother.classList.remove('active');
             }
         }
-
         function copyCode(text) { navigator.clipboard.writeText(text).then(() => { showToast(`已複製：${text}`); }).catch(err => { alert(`訂位代號：${text}`); }); }
         function showToast(message) {
             const container = document.getElementById('toast-container');
