@@ -13,7 +13,8 @@
                     colors: {
                         starlux: { dark: '#3E3A35', brown: '#6B5B4E', gold: '#C5A572', cream: '#F8F4E3' },
                         sushi: { black: '#1a1a1a', wood: '#e6cda3' },
-                        fuji: { blue: '#2c5ea8', white: '#f3f4f6' }
+                        fuji: { blue: '#2c5ea8', white: '#f3f4f6' },
+                        toyota: { red: '#eb0a1e' }
                     }
                 }
             }
@@ -35,6 +36,9 @@
         .sushi-card { background: #151515; color: #e6cda3; border: 1px solid #333; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
         .snoopy-card { background: #fffbf0; border: 2px dashed #8b5e3c; color: #5d4037; }
         .bus-card { background: linear-gradient(135deg, #2c5ea8 0%, #1e4079 100%); color: white; box-shadow: 0 10px 20px -5px rgba(44, 94, 168, 0.4); border-left: 5px solid #fbbf24; }
+        
+        /* 租車卡片 (GR86 Style) */
+        .rent-card { border-left: 5px solid #eb0a1e; }
 
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .page-content, .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
@@ -315,38 +319,51 @@
                 <div class="flex flex-col items-center"><div class="w-2 h-2 rounded-full bg-green-500 mt-2"></div></div>
                 <div class="glass-card flex-1 rounded-2xl p-4 border-l-4 border-green-500">
                     <div class="flex justify-between items-start"><h3 class="font-bold text-gray-800">抵達河口湖</h3><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-bold">Mount Fuji</span></div>
-                    <div class="mt-4 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                        <div class="flex items-center gap-2 mb-2"><i class="fas fa-car text-green-600"></i><span class="font-bold text-sm">Toyota Rent a Car</span></div>
-                        <p class="text-xs text-gray-500 mb-2">富士河口湖店 (取車)</p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida0" target="_blank" class="block w-full text-center bg-green-500 text-white text-xs py-2 rounded shadow-sm hover:bg-green-600 transition"><i class="fas fa-location-arrow mr-1"></i> 導航至租車行</a>
-                    </div>
                 </div>
             </div>
-            
-            <div class="flex gap-4">
-                <div class="flex flex-col items-center">
-                    <div class="w-3 h-3 rounded-full bg-blue-800 ring-4 ring-blue-100 mt-2"></div>
+
+            <div class="glass-card flex-1 rounded-2xl p-4 rent-card mt-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div><h3 class="font-bold text-gray-800 text-lg">Toyota Rent a Car</h3><p class="text-xs text-gray-500">富士河口湖店</p></div>
+                    <span class="bg-[#eb0a1e] text-white text-xs font-bold px-2 py-1 rounded shadow-sm">GR86</span>
                 </div>
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="text-4xl text-[#eb0a1e]"><i class="fas fa-car-side"></i></div>
+                    <div><div class="text-xl font-bold text-gray-800">GR86 (SP1)</div><div class="text-xs text-gray-500">AT車 | 禁煙</div></div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-3 border border-gray-200 space-y-3">
+                    <div class="flex justify-between text-xs text-gray-600">
+                        <div><div class="font-bold text-gray-400">PICK UP</div><div class="font-bold text-gray-800">12/07 13:00</div></div>
+                        <div class="text-right"><div class="font-bold text-gray-400">RETURN</div><div class="font-bold text-gray-800">12/08 13:00</div></div>
+                    </div>
+                    <div class="flex justify-between items-center pt-2 border-t border-gray-200">
+                        <div><div class="text-[10px] text-gray-400 uppercase">Reservation No.</div><div class="font-mono text-base font-bold text-[#eb0a1e]">98129619200</div></div>
+                        <button onclick="copyCode('98129619200')" class="w-8 h-8 rounded-full bg-red-50 text-[#eb0a1e] flex items-center justify-center hover:bg-red-100 transition"><i class="far fa-copy"></i></button>
+                    </div>
+                    <div class="flex justify-between items-center pt-2 border-t border-gray-200">
+                        <div class="text-[10px] text-gray-400 uppercase">Total Price</div>
+                        <div class="font-bold text-gray-800">¥18,700 <span class="text-[10px] font-normal text-gray-400">(現場刷卡)</span></div>
+                    </div>
+                </div>
+                <div class="mt-3 flex gap-2">
+                     <a href="tel:0555721100" class="flex-1 bg-green-50 text-green-600 text-xs py-2 rounded border border-green-100 flex items-center justify-center gap-1"><i class="fas fa-phone"></i> 店鋪電話</a>
+                    <button onclick="copyCode('161 273 303*05')" class="flex-1 bg-blue-50 text-blue-600 text-xs py-2 rounded border border-blue-100 flex items-center justify-center gap-1"><i class="fas fa-map-pin"></i> 複製 MapCode</button>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida0" target="_blank" class="mt-2 block w-full text-center bg-[#eb0a1e] text-white text-xs py-2 rounded shadow-sm hover:bg-red-700 transition"><i class="fas fa-location-arrow mr-1"></i> 導航至租車行</a>
+            </div>
+            
+            <div class="flex gap-4 mt-4">
+                <div class="flex flex-col items-center"><div class="w-3 h-3 rounded-full bg-blue-800 ring-4 ring-blue-100 mt-2"></div></div>
                 <div class="glass-card flex-1 rounded-2xl p-4 border-l-4 border-blue-800">
                     <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800">河口湖富士倒影 富士吟景</h3>
-                            <p class="text-xs text-gray-500 mt-1">Fuji Ginkei</p>
-                        </div>
-                        <div class="bg-blue-50 text-blue-800 p-2 rounded-lg text-xs font-bold flex flex-col items-center">
-                            <i class="fas fa-hot-tub"></i>
-                            <span>Check In</span>
-                        </div>
+                        <div><h3 class="font-bold text-lg text-gray-800">河口湖富士倒影 富士吟景</h3><p class="text-xs text-gray-500 mt-1">Fuji Ginkei</p></div>
+                        <div class="bg-blue-50 text-blue-800 p-2 rounded-lg text-xs font-bold flex flex-col items-center"><i class="fas fa-hot-tub"></i><span>Check In</span></div>
                     </div>
-                    
                     <div class="mt-3 flex items-center justify-between bg-gray-50 p-2 rounded-lg border border-gray-100">
                         <div class="text-xs text-gray-500">Total Price</div>
                         <div class="text-sm font-bold text-gray-800">NT$12,765 <span class="text-xs text-gray-400 font-normal">(¥63,650)</span></div>
                     </div>
-
-                    <a href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida1" target="_blank" class="mt-3 block w-full text-center bg-blue-800 text-white text-xs py-2 rounded hover:bg-blue-900 transition">
-                        <i class="fas fa-map-marker-alt mr-1"></i> 查看飯店位置
-                    </a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida1" target="_blank" class="mt-3 block w-full text-center bg-blue-800 text-white text-xs py-2 rounded hover:bg-blue-900 transition"><i class="fas fa-map-marker-alt mr-1"></i> 查看飯店位置</a>
                 </div>
             </div>
             
