@@ -12,6 +12,10 @@
                 extend: {
                     colors: {
                         starlux: { dark: '#3E3A35', brown: '#6B5B4E', gold: '#C5A572', cream: '#F8F4E3' },
+                        sushi: { black: '#1a1a1a', wood: '#e6cda3' },
+                        fuji: { blue: '#2c5ea8', white: '#f3f4f6' },
+                        toyota: { red: '#eb0a1e' },
+                        jr: { red: '#e60012' }, 
                         luger: { red: '#4a0e0e', gold: '#d4af37' }
                     }
                 }
@@ -22,548 +26,630 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
         
-        body { font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; padding-bottom: 100px; background-color: #f8fafc; }
+        body { font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; padding-bottom: 80px; background-color: #f8fafc; }
         
-        /* 卡片樣式 */
-        .glass-card { background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-        .flight-card { background: linear-gradient(135deg, #3E3A35 0%, #5d5045 100%); color: #F8F4E3; }
-        .sushi-card { background: #1a1a1a; color: #e6cda3; border: 1px solid #333; }
-        .luger-card { background: #4a0e0e; color: #f3e5ab; border: 1px solid #d4af37; }
-        .train-card { background: white; border-left: 6px solid #e60012; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .flight-card { background: linear-gradient(135deg, #3E3A35 0%, #5d5045 100%); color: #F8F4E3; box-shadow: 0 15px 30px -10px rgba(62, 58, 53, 0.6); border: 1px solid rgba(197, 165, 114, 0.1); }
+        .sushi-card { background: #151515; color: #e6cda3; border: 1px solid #333; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); }
+        .snoopy-card { background: #fffbf0; border: 2px dashed #8b5e3c; color: #5d4037; }
+        .bus-card { background: linear-gradient(135deg, #2c5ea8 0%, #1e4079 100%); color: white; box-shadow: 0 10px 20px -5px rgba(44, 94, 168, 0.4); border-left: 5px solid #fbbf24; }
         .rent-card { border-left: 5px solid #eb0a1e; }
-        
-        /* 導航按鈕 */
-        .date-btn { transition: all 0.2s; }
-        .date-btn.active { background-color: #2563eb; color: white; transform: scale(1.05); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
-        
-        /* 頁面切換 */
-        .page-content { display: none; animation: fadeIn 0.3s ease-in-out; }
-        .page-content.active { display: block; }
-        
-        /* 記帳按鈕 */
-        .pay-btn { border: 1px solid #e5e7eb; color: #6b7280; transition: all 0.2s; }
-        .pay-btn.active { background-color: #16a34a; color: white; border-color: #16a34a; font-weight: bold; }
+        .fuji-forecast-card { background: linear-gradient(to bottom, #3b82f6 0%, #93c5fd 100%); color: white; position: relative; overflow: hidden; }
+        .train-card { background: white; border-left: 6px solid #e60012; border-right: 1px solid #ddd; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .luger-card { background: #4a0e0e; color: #f3e5ab; border: 1px solid #d4af37; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.6); }
+        .lounge-card { background: linear-gradient(135deg, #fdfbf7 0%, #fff 100%); border: 1px solid #e5e7eb; border-left: 4px solid #d4af37; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeUp { 0% { opacity: 0; transform: translate(-50%, 20px); } 20% { opacity: 1; transform: translate(-50%, 0); } 80% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; transform: translate(-50%, -20px); } }
-        .toast-msg { animation: fadeUp 2s ease-in-out forwards; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .page-content, .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .page-content.active, .tab-content.active { display: block; }
+        
+        .weather-widget { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .fuji-bg { position: absolute; bottom: -10px; right: -20px; font-size: 120px; opacity: 0.2; color: white; transform: rotate(-10deg); }
+
+        .check-item { transition: all 0.2s; }
+        .check-item.checked span { text-decoration: line-through; color: #9ca3af; }
+        .check-item.checked { background-color: #f9fafb; }
+        
+        .date-btn { transition: all 0.2s; }
+        .date-btn.active { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        
+        .weather-toggle-btn.active-sun { background-color: #fef3c7; color: #d97706; border-color: #d97706; }
+        .weather-toggle-btn.active-rain { background-color: #e0f2fe; color: #0284c7; border-color: #0284c7; }
+        .weather-plan { display: none; animation: fadeIn 0.4s ease; }
+        .weather-plan.active { display: block; }
+
+        /* Budget Payment Buttons Fixed */
+        .pay-btn { border: 1px solid #e5e7eb; color: #6b7280; transition: all 0.2s; flex: 1; min-width: 60px; text-align: center; justify-content: center; }
+        .pay-btn.active { background-color: #16a34a; color: white; border-color: #16a34a; font-weight: bold; }
+        
+        /* Input Fixes */
+        input[type="number"], input[type="text"] { width: 100%; box-sizing: border-box; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-24">
 
     <div class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
         <div class="max-w-md mx-auto px-4 pt-3 pb-2">
             <h1 class="text-lg font-bold text-center text-slate-800 mb-2">東京之旅 2025 🇯🇵</h1>
-            <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-1">
-                <button onclick="switchPage('list')" id="btn-list" class="date-btn flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[70px] whitespace-nowrap bg-red-50 text-red-500">🎒清單</button>
-                <button onclick="switchPage('budget')" id="btn-budget" class="date-btn flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[70px] whitespace-nowrap bg-green-50 text-green-600">💰費用</button>
-                <button onclick="switchPage('day1')" id="btn-day1" class="date-btn active bg-blue-600 text-white flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[60px] whitespace-nowrap">12/05</button>
-                <button onclick="switchPage('day2')" id="btn-day2" class="date-btn bg-gray-100 text-gray-400 flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[60px] whitespace-nowrap">12/06</button>
-                <button onclick="switchPage('day3')" id="btn-day3" class="date-btn bg-gray-100 text-gray-400 flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[60px] whitespace-nowrap">12/07</button>
-                <button onclick="switchPage('day4')" id="btn-day4" class="date-btn bg-gray-100 text-gray-400 flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[60px] whitespace-nowrap">12/08</button>
-                <button onclick="switchPage('day5')" id="btn-day5" class="date-btn bg-gray-100 text-gray-400 flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[60px] whitespace-nowrap">12/09</button>
-            </div>
+            <div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-1" id="date-nav">
+                </div>
         </div>
     </div>
 
-    <div class="max-w-md mx-auto px-4 py-4">
-
-        <div id="view-list" class="page-content">
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                <h2 class="font-bold text-lg mb-4 flex items-center gap-2 text-red-500"><i class="fas fa-clipboard-check"></i> 行李檢查表</h2>
-                <div class="flex gap-2 mb-4">
-                    <input type="text" id="newItemInput" placeholder="輸入項目..." class="flex-1 border rounded-lg px-3 py-2 text-sm">
-                    <button onclick="addItem()" class="bg-red-500 text-white px-4 rounded-lg"><i class="fas fa-plus"></i></button>
-                </div>
-                <div id="checklist-container" class="space-y-2"></div>
-            </div>
-        </div>
-
-        <div id="view-budget" class="page-content">
-            <div class="bg-gradient-to-r from-green-600 to-emerald-600 p-6 rounded-2xl shadow-lg text-white mb-4 text-center">
-                <h3 class="text-xs opacity-80 mb-1">總支出 (台幣)</h3>
-                <div class="text-4xl font-bold">NT$ <span id="total-all-twd">0</span></div>
-                <div class="mt-2 pt-2 border-t border-white/20 text-sm opacity-90 flex justify-between px-4">
-                    <span>日幣現金支出:</span>
-                    <span class="font-mono">¥ <span id="total-cash-jpy">0</span></span>
-                </div>
-            </div>
-
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                <h4 class="font-bold text-gray-700 mb-4 border-l-4 border-green-500 pl-2">新增消費</h4>
-                <div class="space-y-4">
-                    <div>
-                        <label class="text-xs text-gray-400 block mb-1">消費項目</label>
-                        <input type="text" id="bud-name" placeholder="例：晚餐、伴手禮" class="w-full border border-gray-300 rounded-lg px-3 py-3 text-base">
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="flex-1">
-                            <label class="text-xs text-gray-400 block mb-1">日幣 (¥)</label>
-                            <input type="number" id="bud-jpy" placeholder="0" class="w-full border border-gray-300 rounded-lg px-3 py-3 text-base" oninput="autoConvert()">
-                        </div>
-                        <div class="flex-1">
-                            <label class="text-xs text-gray-400 block mb-1">台幣 (NT$)</label>
-                            <input type="number" id="bud-twd" placeholder="0" class="w-full border border-gray-300 rounded-lg px-3 py-3 text-base">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label class="text-xs text-gray-400 block mb-2">付款方式</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button onclick="setPay('現金')" class="pay-btn py-2 rounded-lg bg-gray-50 text-sm">現金</button>
-                            <button onclick="setPay('西瓜卡')" class="pay-btn py-2 rounded-lg bg-gray-50 text-sm">西瓜卡</button>
-                            <button onclick="setPay('Cube')" class="pay-btn py-2 rounded-lg bg-gray-50 text-sm">Cube</button>
-                            <button onclick="setPay('台新')" class="pay-btn py-2 rounded-lg bg-gray-50 text-sm">台新</button>
-                            <button onclick="setPay('中信')" class="pay-btn py-2 rounded-lg bg-gray-50 text-sm">中信</button>
-                        </div>
-                        <input type="hidden" id="bud-card" value="現金">
-                    </div>
-
-                    <button onclick="addExpense()" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold shadow-md active:scale-95 transition">加入記帳</button>
-                </div>
-            </div>
-
-            <div id="expense-list" class="space-y-3 mt-4 pb-20"></div>
-        </div>
-
-        <div id="view-day1" class="page-content active">
-            <div class="glass-card rounded-2xl p-4 mb-4">
-                <h3 class="font-bold text-gray-800 text-lg mb-2">06:00 出發前往機場</h3>
-                <p class="text-sm text-gray-500">哥哥載媽媽 -> 台北車站 -> 機捷 -> T1</p>
-            </div>
-
-            <div class="flight-card rounded-2xl p-5 mb-4 relative overflow-hidden">
-                <div class="relative z-10">
-                    <div class="flex justify-between mb-4 border-b border-white/20 pb-2"><span class="font-mono text-xl font-bold">JX802</span><span class="text-xs bg-white/20 px-2 py-1 rounded">STARLUX</span></div>
-                    <div class="flex justify-between text-center mb-4"><div><div class="text-3xl font-bold">TPE</div><div class="text-xs opacity-70">10:15</div></div><div class="text-xs opacity-50 pt-2">3h 00m<br>✈</div><div><div class="text-3xl font-bold">NRT</div><div class="text-xs opacity-70">14:15</div></div></div>
-                    <div class="bg-black/20 rounded-xl p-3 mb-3 text-sm space-y-1">
-                        <div class="flex justify-between"><span>💺 Seat</span><span class="font-bold">5A</span></div>
-                        <div class="flex justify-between"><span>🍴 Meal</span><span class="font-bold text-xs">胡同日本和牛臀肉上蓋牛排</span></div>
-                    </div>
-                    <div class="bg-[#F8F4E3] text-[#3E3A35] rounded-xl p-3 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="copyCode('2MZCN7')">
-                        <div><div class="text-[10px] font-bold">BOOKING REF</div><div class="font-mono font-bold">2MZCN7</div><div class="text-[10px]">Tung Chia Jung</div></div>
-                        <i class="far fa-copy text-xl opacity-50"></i>
-                    </div>
-                    <a href="https://www.starlux-airlines.com/zh-TW/booking/manage-my-trip/manage-my-trip" target="_blank" class="mt-3 block text-center text-xs border border-white/30 rounded py-2 hover:bg-white/10">行程管理</a>
-                </div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 mb-4 border-l-4 border-blue-600">
-                <h3 class="font-bold text-lg">東橫INN 南町田</h3>
-                <p class="text-xs text-gray-500">Toyoko Inn Minami-Machida</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida" target="_blank" class="mt-2 block text-right text-xs text-blue-500 underline">查看位置</a>
-            </div>
-        </div>
-
-        <div id="view-day2" class="page-content">
-            <div class="bg-gray-200 p-1 rounded-xl flex text-sm font-medium mb-4">
-                <button onclick="toggleTab('brother')" class="flex-1 py-2 rounded-lg bg-white shadow-sm">哥哥</button>
-                <button onclick="toggleTab('mom')" class="flex-1 py-2 rounded-lg text-gray-500">媽媽</button>
-            </div>
-
-            <div id="tab-brother" class="space-y-4">
-                <div class="glass-card rounded-2xl p-4 border-l-4 border-indigo-500">
-                    <h3 class="font-bold">台北出發</h3><p class="text-sm text-gray-500">Taxi -> 南港 -> 北車 -> 桃機 T1</p>
-                </div>
-                <div class="flight-card rounded-2xl p-5 relative overflow-hidden">
-                    <div class="relative z-10">
-                        <div class="flex justify-between mb-4 border-b border-white/20 pb-2"><span class="font-mono text-xl font-bold">JX802</span><span class="text-xs bg-white/20 px-2 py-1 rounded">STARLUX</span></div>
-                        <div class="flex justify-between text-center mb-4"><div><div class="text-3xl font-bold">TPE</div><div class="text-xs opacity-70">10:15</div></div><div><div class="text-3xl font-bold">NRT</div><div class="text-xs opacity-70">14:15</div></div></div>
-                        <div class="bg-black/20 rounded-xl p-3 mb-3 text-sm space-y-1">
-                            <div class="flex justify-between"><span>💺 Seat</span><span class="font-bold">20A</span></div>
-                            <div class="flex justify-between"><span>🍴 Meal</span><span class="font-bold text-xs">越式烤豬肉米線佐蒜辣魚露醬</span></div>
-                        </div>
-                        <div class="bg-[#F8F4E3] text-[#3E3A35] rounded-xl p-3 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="copyCode('2MUDEK')">
-                            <div><div class="text-[10px] font-bold">BOOKING REF</div><div class="font-mono font-bold">2MUDEK</div><div class="text-[10px]">Chiu Mu Hsuan</div></div>
-                            <i class="far fa-copy text-xl opacity-50"></i>
-                        </div>
-                        <a href="https://www.starlux-airlines.com/zh-TW/booking/manage-my-trip/manage-my-trip" target="_blank" class="mt-3 block text-center text-xs border border-white/30 rounded py-2 hover:bg-white/10">行程管理</a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-mom" class="hidden space-y-4">
-                <div class="glass-card rounded-2xl p-4 border-l-4 border-yellow-500">
-                    <h3 class="font-bold">史努比博物館</h3><p class="text-sm text-gray-500">10:00 開館，步行可達</p>
-                </div>
-                <div class="glass-card rounded-2xl p-4">
-                    <h3 class="font-bold">前往潮見王子飯店</h3>
-                    <p class="text-xs text-gray-500">南町田 -> 澀谷 -> 新木場 -> 潮見</p>
-                    <a href="https://www.google.com/maps/dir/?api=1&origin=Minami-machida+Grandberry+Park+Station&destination=Tokyo+Bay+Shiomi+Prince+Hotel&travelmode=transit" target="_blank" class="text-xs text-blue-500 underline">Google 導航</a>
-                </div>
-            </div>
-
-            <div class="relative py-4 text-center"><span class="bg-slate-100 px-4 text-sm text-gray-500 font-bold">傍晚會合</span></div>
-            
-            <div class="glass-card rounded-2xl p-4 border-l-4 border-orange-400 mb-4">
-                <h3 class="font-bold">東京灣潮見王子大飯店</h3>
-                <p class="text-xs text-gray-500">Tokyo Bay Shiomi Prince Hotel</p>
-            </div>
-
-            <div class="sushi-card rounded-2xl p-5 shadow-xl">
-                <div class="flex justify-between border-b border-[#e6cda3]/30 pb-2 mb-3"><span class="text-xs tracking-widest">DINNER</span><span class="font-bold text-xl">19:45</span></div>
-                <h2 class="text-2xl font-bold text-white mb-1">鮨 麻布</h2>
-                <div class="bg-[#333]/50 p-3 rounded border border-[#e6cda3]/20 mb-3">
-                     <div class="flex justify-between items-center"><span>Ref: <span class="font-mono font-bold">P6GKCD</span></span><button onclick="copyCode('P6GKCD')"><i class="far fa-copy"></i></button></div>
-                     <div class="text-xs mt-1 opacity-80">キュウ ボクケン | 2位 (Counter)</div>
-                </div>
-                <div class="flex gap-2 mt-3">
-                    <a href="https://www.tablecheck.com/zh-TW/account/reservations/upcoming" target="_blank" class="flex-1 text-center text-xs border border-[#e6cda3]/50 text-[#e6cda3] py-2 rounded">TableCheck</a>
-                    <a href="https://maps.google.com/?q=Sushi+Azabu+Tokyo" target="_blank" class="flex-1 text-center text-xs border border-[#e6cda3]/50 text-[#e6cda3] py-2 rounded">Map</a>
-                </div>
-            </div>
-            
-            <div class="glass-card rounded-2xl p-4 border-l-4 border-indigo-500 mt-4">
-                 <h3 class="font-bold text-gray-800">東京車站夜景散策</h3>
-                 <ul class="list-none space-y-2 mt-2 text-sm text-gray-600">
-                    <li><span class="font-bold text-indigo-600">6F KITTE</span>: 屋上庭園 (~22:00)</li>
-                    <li><span class="font-bold text-indigo-600">7F 新丸の內</span>: 餐飲露臺 (~23:00)</li>
-                    <li class="opacity-60">5F 丸の內: 觀景台 (~20:00)</li>
-                 </ul>
-            </div>
-        </div>
-
-        <div id="view-day3" class="page-content">
-            <div class="glass-card rounded-2xl p-4 mb-4 border-l-4 border-yellow-500">
-                <h3 class="font-bold text-yellow-700">東京站採買攻略</h3>
-                <p class="text-xs text-gray-600 mt-1">1. 改札內: Be! FRUITS SANDWICH (先買!)</p>
-                <p class="text-xs text-gray-600">2. 改札外: ROKUMEI COFFEE CO.</p>
-            </div>
-
-            <div class="bus-card rounded-2xl p-4 mb-4">
-                <div class="flex justify-between mb-2 border-b border-white/20 pb-2"><span class="font-bold">富士急巴士 No.117</span><span>10:20 -> 12:22</span></div>
-                <div class="flex justify-between text-sm"><span>東京八重洲南</span><span>河口湖</span></div>
-                <div class="bg-black/10 rounded p-2 mt-2 flex justify-between text-sm"><span>1C, 1D</span><span>¥4,600 (2人)</span></div>
-                <a href="https://willer-travel.com/tw/" target="_blank" class="mt-2 block text-center text-xs bg-white/20 py-1 rounded">預約確認</a>
-            </div>
-
-            <div class="glass-card rent-card rounded-2xl p-4 mb-4">
-                <div class="flex justify-between"><h3 class="font-bold text-gray-800">Toyota Rent a Car</h3><span class="bg-red-600 text-white text-xs px-2 py-1 rounded">GR86</span></div>
-                <div class="bg-gray-50 p-3 rounded mt-2 text-sm space-y-2">
-                     <div class="flex justify-between"><span>取: 12/07 13:00</span><span>還: 12/08 13:00</span></div>
-                     <div class="flex justify-between items-center pt-2 border-t"><span>預約號: <span class="font-mono font-bold text-red-600">98129619200</span></span><button onclick="copyCode('98129619200')"><i class="far fa-copy"></i></button></div>
-                     <div class="flex justify-between"><span>費用</span><span>¥18,700</span></div>
-                </div>
-                <div class="flex gap-2 mt-2">
-                    <button onclick="copyCode('161 273 303*05')" class="flex-1 bg-blue-50 text-blue-600 text-xs py-2 rounded">MapCode</button>
-                    <a href="./rental.pdf" target="_blank" class="flex-1 bg-gray-800 text-white text-xs py-2 rounded text-center">PDF</a>
-                </div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 mb-4 border-l-4 border-orange-500">
-                <h3 class="font-bold text-gray-800">ほうとう不動 東恋路店</h3>
-                <p class="text-xs text-gray-500">雲朵建築餺飥麵 (午餐)</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=Hoto+Fudo+Higashikoiji" target="_blank" class="text-xs text-orange-500 underline">導航</a>
-            </div>
-            
-            <div class="glass-card rounded-2xl p-4 mb-4">
-                <h3 class="font-bold text-blue-600">☀️ 晴天方案</h3>
-                <ul class="list-disc ml-4 text-sm text-gray-600">
-                    <li>西湖 療癒之里 根場</li>
-                    <li>Tatego-Hama Beach (西湖)</li>
-                    <li>本栖湖展望公園 (千圓鈔票景)</li>
-                </ul>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 mb-4 border-l-4 border-blue-800">
-                <h3 class="font-bold text-lg text-gray-800">富士吟景</h3>
-                <p class="text-xs text-gray-500">Fuji Ginkei | 18:00 夕食 (会席風和食膳)</p>
-                <div class="mt-2 flex justify-between items-center bg-gray-50 p-2 rounded"><span>Ref: <span class="font-mono font-bold">Y7drQCB</span></span><button onclick="copyCode('Y7drQCB')"><i class="far fa-copy"></i></button></div>
-                <div class="text-right text-xs font-bold mt-1">NT$12,765 (¥63,650)</div>
-            </div>
-        </div>
-
-        <div id="view-day4" class="page-content">
-            <div class="glass-card rounded-2xl p-4 border-l-4 border-red-500 mb-4">
-                <div class="flex justify-between"><h3 class="font-bold">富士山日出</h3><span class="text-red-500 font-bold">06:41 AM</span></div>
-                <p class="text-xs text-gray-500">推薦：房間內或平野之濱</p>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 mb-4 border-l-4 border-blue-500">
-                <h3 class="font-bold">早晨攝影行程</h3>
-                <ul class="text-sm text-gray-600 space-y-1 mt-1">
-                    <li>• 05:40 Lawson 河口湖站前 (趁人少)</li>
-                    <li>• 06:40 平野之濱 (日出/天鵝)</li>
-                    <li>• 白鳥濱 (如果平野人多)</li>
-                    <li>• 忍野八海 (順路可去)</li>
-                    <li>• 新倉山淺間公園 (需爬樓梯)</li>
-                    <li>• 09:30 大石公園 & Lake Bake Cafe</li>
-                </ul>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 mb-4">
-                <h3 class="font-bold text-gray-800">IDATEN BETTEI (午餐)</h3>
-                <p class="text-xs text-gray-500">河口湖車站附近天婦羅</p>
-            </div>
-
-            <div class="train-card rounded-2xl p-4 mb-4">
-                <div class="flex justify-between mb-2 border-b pb-2"><span class="font-bold text-red-600">富士回遊 32号</span><span>14:09 -> 16:07</span></div>
-                <div class="flex justify-between text-sm"><span>河口湖</span><span>新宿</span></div>
-                <div class="text-xs text-gray-400 text-right mt-1">已購票 (Klook) NT$1,799</div>
-            </div>
-
-            <div class="luger-card rounded-2xl p-5 mb-4 shadow-xl">
-                <div class="flex justify-between border-b border-[#d4af37]/30 pb-2 mb-3"><span class="text-xs tracking-widest">DINNER</span><span class="font-bold text-xl">18:30</span></div>
-                <h2 class="font-serif text-2xl font-bold text-[#f3e5ab] mb-1">Peter Luger</h2>
-                <div class="bg-black/20 p-3 rounded border border-[#d4af37]/20 mb-3">
-                     <div class="flex justify-between items-center"><span>Ref: <span class="font-mono font-bold">MAZZHR</span></span><button onclick="copyCode('MAZZHR')"><i class="far fa-copy"></i></button></div>
-                     <div class="text-xs mt-1 opacity-80">キュウ ボクケン | 2名 | 🎂 Birthday</div>
-                </div>
-                <div class="text-[10px] bg-[#d4af37]/10 p-2 rounded text-center space-y-1 text-[#f3e5ab]">
-                    <div>Steak for Two / Bacon / German Potatoes / Spinach</div>
-                </div>
-                 <div class="flex gap-2 mt-3">
-                     <a href="https://www.tablecheck.com/zh-TW/account/reservations/upcoming" target="_blank" class="flex-1 text-center text-xs border border-[#d4af37]/50 text-[#d4af37] py-2 rounded hover:bg-[#d4af37] hover:text-[#4a0e0e] transition">TableCheck</a>
-                     <a href="https://goo.gl/maps/PeterLugerTokyo" target="_blank" class="flex-1 text-center text-xs border border-[#d4af37]/50 text-[#d4af37] py-2 rounded hover:bg-[#d4af37] hover:text-[#4a0e0e] transition">Map</a>
-                 </div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 mb-4 border-l-4 border-purple-600">
-                <h3 class="font-bold text-gray-800">惠比壽花園廣場塔</h3>
-                <p class="text-xs text-gray-500">38F 免費觀景台，看東京鐵塔夜景 (晚餐後步行)</p>
-            </div>
-        </div>
-
-        <div id="view-day5" class="page-content">
-            <div class="snoopy-card rounded-2xl p-4 mb-4">
-                <h3 class="font-bold text-[#5d4037]">PEANUTS Cafe (原宿)</h3>
-                <p class="text-xs text-[#8b5e3c]">SUNNY SIDE kitchen | 早餐後去</p>
-                <a href="https://goo.gl/maps/PeanutsCafeHarajuku" target="_blank" class="mt-2 block w-full text-center bg-[#8b5e3c] text-white text-xs py-2 rounded">查看位置</a>
-            </div>
-
-            <div class="glass-card rounded-2xl p-4 mb-4 border-l-4 border-pink-400">
-                <h3 class="font-bold text-gray-800">最後衝刺：藥妝採買</h3>
-                <a href="https://www.threads.com/@1han0731/post/DQQjYirj_NC?xmt=AQF0gKb-FVU9Bg2ZQ_7qyuUUrl0XwS2YaH3nM42sD5VQX0S0z3YWGVkBxTWbMbLntoHnuotO&slof=1" target="_blank" class="mt-2 block w-full text-center bg-pink-500 text-white text-xs py-2 rounded shadow-sm">開啟 Threads 推薦</a>
-            </div>
-
-            <div class="train-card rounded-2xl p-4 mb-4">
-                <div class="flex justify-between mb-2 border-b pb-2"><span class="font-bold text-red-600">N'EX 成田特快</span><span>12:14 -> 13:23</span></div>
-                <div class="flex justify-between text-sm"><span>澀谷</span><span>成田 T2</span></div>
-                <div class="text-xs text-gray-400 text-right mt-1">已購票 (Reserved)</div>
-            </div>
-
-            <div class="bg-gray-200 p-1 rounded-xl flex text-sm font-medium mb-4">
-                <button onclick="toggleTabDay5('brother')" class="flex-1 py-2 rounded-lg bg-white shadow-sm">哥哥 (5K)</button>
-                <button onclick="toggleTabDay5('mom')" class="flex-1 py-2 rounded-lg text-gray-500">媽媽 (20K)</button>
-            </div>
-
-            <div id="tab-brother-d5" class="space-y-4">
-                <div class="flight-card rounded-2xl p-5 relative overflow-hidden">
-                    <div class="relative z-10">
-                        <div class="flex justify-between mb-4 border-b border-white/20 pb-2"><span class="font-mono text-xl font-bold">JX803</span><span class="text-xs bg-white/20 px-2 py-1 rounded">STARLUX</span></div>
-                        <div class="flex justify-between text-center mb-4"><div><div class="text-3xl font-bold">NRT</div><div class="text-xs opacity-70">15:35</div></div><div><div class="text-3xl font-bold">TPE</div><div class="text-xs opacity-70">18:45</div></div></div>
-                        <div class="bg-black/20 rounded-xl p-3 mb-3 text-sm space-y-1">
-                            <div class="flex justify-between"><span>💺 Seat</span><span class="font-bold">5K</span></div>
-                            <div class="flex justify-between"><span>🍴 Meal</span><span class="font-bold text-xs">人形町今半黑毛和牛肩胛壽喜燒</span></div>
-                            <div class="text-xs opacity-70 pt-1">🍸 白鶴淡雪 / 培茶拿鐵 / 胡蘿蔔汁</div>
-                        </div>
-                        <div class="bg-[#F8F4E3] text-[#3E3A35] rounded-xl p-3 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="copyCode('35FLMP')">
-                            <div><div class="text-[10px] font-bold">BOOKING REF</div><div class="font-mono font-bold">35FLMP</div><div class="text-[10px]">Chiu Mu Hsuan</div></div>
-                            <i class="far fa-copy text-xl opacity-50"></i>
-                        </div>
-                        <a href="https://www.starlux-airlines.com/zh-TW/booking/manage-my-trip/manage-my-trip" target="_blank" class="mt-3 block text-center text-xs border border-white/30 rounded py-2 hover:bg-white/10">行程管理</a>
-                    </div>
-                </div>
-                <div class="glass-card rounded-2xl p-4 border-l-4 border-pink-300">
-                    <h3 class="font-bold">🌸 櫻花貴賓室 (Sakura Lounge)</h3><p class="text-xs text-gray-500">第二航廈南側 (近 61 登機口)</p>
-                </div>
-            </div>
-
-            <div id="tab-mom-d5" class="hidden space-y-4">
-                <div class="flight-card rounded-2xl p-5 relative overflow-hidden">
-                    <div class="relative z-10">
-                        <div class="flex justify-between mb-4 border-b border-white/20 pb-2"><span class="font-mono text-xl font-bold">JX803</span><span class="text-xs bg-white/20 px-2 py-1 rounded">STARLUX</span></div>
-                        <div class="flex justify-between text-center mb-4"><div><div class="text-3xl font-bold">NRT</div><div class="text-xs opacity-70">15:35</div></div><div><div class="text-3xl font-bold">TPE</div><div class="text-xs opacity-70">18:45</div></div></div>
-                        <div class="bg-black/20 rounded-xl p-3 mb-3 text-sm space-y-1">
-                            <div class="flex justify-between"><span>💺 Seat</span><span class="font-bold">20K</span></div>
-                            <div class="flex justify-between"><span>🍴 Meal</span><span class="font-bold text-xs">和風滑蛋厚切豬排丼</span></div>
-                        </div>
-                        <div class="bg-[#F8F4E3] text-[#3E3A35] rounded-xl p-3 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="copyCode('3HEG5I')">
-                            <div><div class="text-[10px] font-bold">BOOKING REF</div><div class="font-mono font-bold">3HEG5I</div><div class="text-[10px]">Tung Chia Jung</div></div>
-                            <i class="far fa-copy text-xl opacity-50"></i>
-                        </div>
-                         <a href="https://www.starlux-airlines.com/zh-TW/booking/manage-my-trip/manage-my-trip" target="_blank" class="mt-3 block text-center text-xs border border-white/30 rounded py-2 hover:bg-white/10">行程管理</a>
-                    </div>
-                </div>
-                <div class="glass-card rounded-2xl p-4 border-l-4 border-gray-500">
-                    <h3 class="font-bold">☕ I.A.S.S Lounge -KoCoo-</h3><p class="text-xs text-gray-500">第二航廈主樓 4F (龍騰卡)</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    <div id="main-container" class="max-w-md mx-auto px-4 py-4 min-h-[80vh]"></div>
 
     <div id="toast-container" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 pointer-events-none z-50 w-max"></div>
 
     <script>
-        // --- Tabs Logic ---
-        function toggleTab(tab) {
-            const bro = document.getElementById('tab-brother');
-            const mom = document.getElementById('tab-mom');
-            const btnBro = document.querySelector('button[onclick="toggleTab(\'brother\')"]');
-            const btnMom = document.querySelector('button[onclick="toggleTab(\'mom\')"]');
+        // ==========================================
+        // 1. 資料設定檔
+        // ==========================================
+        const tripData = {
+            day1: {
+                date: "12/05",
+                weather: { loc: "Tokyo", temp: "13° / 7°", status: "Partly Cloudy", icon: "fas fa-cloud-sun text-orange-400" },
+                items: [
+                    { type: "transport", time: "06:00", title: "出發前往機場", desc: "哥哥載媽媽 -> 台北車站 -> 機捷 -> T1", icon: "fas fa-car", color: "blue" },
+                    { 
+                        type: "flight", code: "JX802", airline: "STARLUX", 
+                        dep: { code: "TPE", time: "10:15" }, arr: { code: "NRT", time: "14:15" }, dur: "3h 00m",
+                        seat: "5A", meal: "胡同日本和牛臀肉上蓋牛排", bookingRef: "2MZCN7", passenger: "Tung Chia Jung",
+                        manageUrl: "https://www.starlux-airlines.com/zh-TW/booking/manage-my-trip/manage-my-trip"
+                    },
+                    { type: "transport", time: "14:15", title: "抵達 & 前往南町田", desc: "成田機場 (NRT) -> 東橫INN", icon: "fas fa-plane-arrival", link: "https://www.google.com/maps/dir/?api=1&destination=Toyoko+Inn+Tokyo+Machida+Station+Odakyu+Line+Higashi&travelmode=transit", linkText: "Google 導航" },
+                    { type: "hotel", title: "東橫INN 南町田", desc: "Toyoko Inn Minami-Machida (Snoopy 博物館旁)", link: "https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida" }
+                ]
+            },
+            day2: {
+                date: "12/06",
+                weather: { loc: "Tokyo", temp: "12° / 5°", status: "Sunny", icon: "fas fa-sun text-orange-500" },
+                tabs: {
+                    brother: [
+                        { type: "transport", title: "台北出發", desc: "Taxi -> 南港 -> 北車 -> 桃機 T1", icon: "fas fa-taxi", color: "indigo" },
+                        { 
+                            type: "flight", code: "JX802", airline: "STARLUX", 
+                            dep: { code: "TPE", time: "10:15" }, arr: { code: "NRT", time: "14:15" }, dur: "3h 00m",
+                            seat: "20A", meal: "越式烤豬肉米線佐蒜辣魚露醬", bookingRef: "2MUDEK", passenger: "Chiu Mu Hsuan",
+                            manageUrl: "https://www.starlux-airlines.com/zh-TW/booking/manage-my-trip/manage-my-trip"
+                        },
+                        { type: "info", title: "前往飯店 (二選一)", content: "N'EX (推薦): 直達東京站轉車 / Skyliner: 日暮里轉車", icon: "fas fa-train", color: "gray" }
+                    ],
+                    mom: [
+                        { type: "snoopy", title: "史努比博物館", desc: "10:00 開館，飯店步行可達", link: "https://snoopymuseum.tokyo/" },
+                        { type: "transport", title: "前往潮見王子飯店", desc: "南町田(田園都市線) -> 澀谷(埼京線) -> 新木場(京葉線) -> 潮見", icon: "fas fa-subway", link: "https://www.google.com/maps/dir/?api=1&origin=Minami-machida+Grandberry+Park+Station&destination=Tokyo+Bay+Shiomi+Prince+Hotel&travelmode=transit" }
+                    ]
+                },
+                jointItems: [
+                    { type: "divider", text: "傍晚會合" },
+                    { type: "hotel", title: "東京灣潮見王子大飯店", desc: "Tokyo Bay Shiomi Prince Hotel", link: "https://maps.google.com/?q=Tokyo+Bay+Shiomi+Prince+Hotel" },
+                    { type: "spot", title: "六本木 冬季點燈", desc: "17:00 - 23:00 (如有時間)", icon: "fas fa-snowflake", color: "blue", link: "https://maps.app.goo.gl/zQXVtDNmLctQVgeCA" },
+                    { 
+                        type: "sushi", title: "鮨 麻布", time: "19:45", rating: "3.54", 
+                        bookingRef: "P6GKCD", details: "Name: キュウ ボクケン | 2位 (Counter)", link: "https://maps.google.com/?q=Sushi+Azabu+Tokyo",
+                        manageUrl: "https://www.tablecheck.com/zh-TW/account/reservations/upcoming"
+                    },
+                    {
+                        type: "spot", title: "東京車站夜景散策", icon: "fas fa-city", color: "indigo",
+                        desc: `<ul class="list-none space-y-2 mt-2">
+                                <li class="flex items-start gap-2"><span class="bg-indigo-100 text-indigo-700 text-[10px] px-1.5 rounded font-bold mt-0.5">6F</span> <div><b>KITTE 丸の內</b><br><span class="text-xs">屋上庭園 (~22:00)</span></div></li>
+                                <li class="flex items-start gap-2"><span class="bg-indigo-100 text-indigo-700 text-[10px] px-1.5 rounded font-bold mt-0.5">7F</span> <div><b>新丸の內</b><br><span class="text-xs">餐飲露臺 (~23:00)</span></div></li>
+                                <li class="flex items-start gap-2 opacity-60"><span class="bg-gray-200 text-gray-600 text-[10px] px-1.5 rounded font-bold mt-0.5">5F</span> <div><b>丸の內</b><br><span class="text-xs">觀景台 (~20:00, 可能來不及)</span></div></li>
+                               </ul>`
+                    }
+                ]
+            },
+            day3: {
+                date: "12/07",
+                weather: { loc: "Kawaguchiko", temp: "9° / -1°", status: "Clear & Cold", icon: "fas fa-mountain text-blue-500" },
+                items: [
+                    { type: "transport", time: "09:00", title: "退房 & 前往東京車站", desc: "JR 京葉線: 潮見 -> 東京", icon: "fas fa-suitcase-rolling" },
+                    { type: "info", title: "東京站採買攻略", content: "1. 改札內: Be! FRUITS SANDWICH<br>2. 改札外: ROKUMEI COFFEE CO.", icon: "fas fa-map-signs", color: "yellow" },
+                    { type: "bus", title: "富士急巴士 No.117", dep: "10:20 東京八重洲南", arr: "12:22 河口湖", seat: "1C, 1D", price: "¥4,600 (2人)", link: "https://willer-travel.com/tw/" },
+                    { type: "transport", title: "抵達河口湖", desc: "前往 Toyota Rent a Car 取車", icon: "fas fa-map-marker-alt" },
+                    { 
+                        type: "rent", title: "Toyota Rent a Car", car: "GR86 (SP1)", 
+                        pickup: "12/07 13:00", return: "12/08 13:00", ref: "98129619200", price: "¥18,700",
+                        tel: "0555721100", mapcode: "161 273 303*05", link: "https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida0", pdf: "./rental.pdf"
+                    },
+                    { type: "fuji-forecast" },
+                    { type: "spot", title: "ほうとう不動 東恋路店", desc: "午餐推薦：雲朵建築餺飥麵", icon: "fas fa-utensils", color: "orange", link: "https://www.google.com/maps/search/?api=1&query=Hoto+Fudo+Higashikoiji" },
+                    { type: "photo-guide" },
+                    { 
+                        type: "weather-plan", 
+                        sun: [
+                            { title: "西湖 療癒之里 根場", desc: "合掌造建築群" },
+                            { title: "Tatego-Hama Beach", desc: "西湖絕美倒影", link: "https://www.google.com/maps/search/?api=1&query=Tatego-Hama+Beach" },
+                            { title: "本栖湖展望公園", desc: "千圓日幣富士山", link: "https://www.google.com/maps/search/?api=1&query=本栖湖展望公園" }
+                        ],
+                        rain: [
+                            { title: "河口湖音樂森林", desc: "歐洲宮廷庭園", link: "https://goo.gl/maps/MusicForest" },
+                            { title: "久保田一竹美術館", desc: "和服藝術", link: "https://goo.gl/maps/Kubota" },
+                            { title: "Forest Mall", desc: "超市/藥妝補貨", link: "https://goo.gl/maps/ForestMall" }
+                        ]
+                    },
+                    { 
+                        type: "hotel", title: "富士吟景", desc: "Fuji Ginkei | 18:00 夕食 (会席風和食膳)", 
+                        bookingRef: "Y7drQCB", price: "NT$12,765", link: "https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Minami-Machida1" 
+                    }
+                ]
+            },
+            day4: {
+                date: "12/08",
+                weather: { loc: "Tokyo", temp: "11° / 6°", status: "Cloudy", icon: "fas fa-cloud text-gray-400" },
+                items: [
+                    { type: "info", title: "富士山日出 06:41", content: "推薦：房間內或露天風呂欣賞逆富士", icon: "fas fa-sun", color: "red" },
+                    { type: "spot", time: "05:40", title: "Lawson 河口湖站前", desc: "清晨拍空景", icon: "fas fa-camera", color: "blue", link: "https://goo.gl/maps/LawsonKawaguchiko" },
+                    { type: "spot", time: "06:41", title: "平野之濱", desc: "山中湖日出 & 天鵝", icon: "fas fa-sun", color: "red", link: "https://goo.gl/maps/HiranoNoHama" },
+                    { type: "spot", title: "白鳥濱", desc: "與天鵝近距離接觸", icon: "fas fa-dove", color: "gray", link: "https://www.google.com/maps/search/Yamanakako+Shiratori+no+Hama" },
+                    { type: "spot", title: "忍野八海 (Optional)", desc: "視時間前往", icon: "fas fa-water", color: "blue", link: "https://goo.gl/maps/Oshino" },
+                    { type: "spot", title: "新倉山淺間公園 (Optional)", desc: "五重塔+富士山 (需爬398階)", icon: "fas fa-torii-gate", color: "red", link: "https://goo.gl/maps/ChureitoPagoda" },
+                    { type: "spot", time: "09:30", title: "大石公園 & Lake Bake", desc: "麵包店露台賞景", icon: "fas fa-bread-slice", color: "purple", link: "https://maps.app.goo.gl/hEcfcV5sCxPjLog88" },
+                    { type: "spot", time: "11:30", title: "IDATEN BETTEI", desc: "午餐：現炸天婦羅", icon: "fas fa-utensils", color: "orange", link: "https://maps.app.goo.gl/BWZ7vxqvTcBTi88Q9" },
+                    { type: "transport", time: "13:00", title: "還車", desc: "Toyota Rent a Car 富士河口湖店", icon: "fas fa-car" },
+                    { type: "train", title: "富士回遊 32号", dep: "14:09 河口湖", arr: "16:07 新宿", note: "已購票 (Klook) NT$1,799" },
+                    { type: "hotel", title: "all day place shibuya", desc: "澀谷全天廣場飯店 | B1出口步行1分", link: "https://goo.gl/maps/AllDayPlace" },
+                    { 
+                        type: "luger", title: "Peter Luger", time: "18:30", bookingRef: "MAZZHR", 
+                        details: "Name: キュウ ボクケン | 2名 | 🎂 Birthday", link: "https://goo.gl/maps/PeterLugerTokyo",
+                        manageUrl: "https://www.tablecheck.com/zh-TW/account/reservations/upcoming"
+                    },
+                    { type: "spot", title: "惠比壽花園廣場塔", desc: "38F 免費觀景台看東京鐵塔", icon: "fas fa-star", color: "purple", link: "https://goo.gl/maps/YebisuGardenPlace" }
+                ]
+            },
+            day5: {
+                date: "12/09",
+                weather: { loc: "Tokyo", temp: "14° / 6°", status: "Sunny", icon: "fas fa-sun text-orange-500" },
+                items: [
+                    { type: "info", title: "飯店早餐", content: "07:00 - 11:00 (L.O. 10:30)", icon: "fas fa-coffee", color: "yellow" },
+                    { type: "snoopy", title: "PEANUTS Cafe", desc: "SUNNY SIDE kitchen (原宿)", link: "https://goo.gl/maps/PeanutsCafeHarajuku" },
+                    { type: "spot", title: "最後衝刺：藥妝採買", desc: "Threads 推薦必買清單", icon: "fas fa-shopping-bag", color: "pink", link: "https://www.threads.com/@1han0731/post/DQQjYirj_NC?xmt=AQF0gKb-FVU9Bg2ZQ_7qyuUUrl0XwS2YaH3nM42sD5VQX0S0z3YWGVkBxTWbMbLntoHnuotO&slof=1" },
+                    { type: "train", title: "N'EX 成田エクスプレス", dep: "12:14 澀谷", arr: "13:23 成田T2", note: "已購票" }
+                ],
+                tabs: {
+                    brother: [
+                        { 
+                            type: "flight", code: "JX803", airline: "STARLUX", 
+                            dep: { code: "NRT", time: "15:35" }, arr: { code: "TPE", time: "18:45" }, dur: "4h 10m",
+                            seat: "5K", meal: "人形町今半黑毛和牛肩胛壽喜燒", bookingRef: "35FLMP", passenger: "Chiu Mu Hsuan",
+                            manageUrl: "https://www.starlux-airlines.com/zh-TW/booking/manage-my-trip/manage-my-trip",
+                            drinks: ["白鶴淡雪氣泡清酒", "培茶拿鐵", "胡蘿蔔汁"]
+                        },
+                        { type: "info", title: "🌸 櫻花貴賓室 (Sakura)", content: "第二航廈南側 (近 61 登機口)", icon: "fas fa-wine-glass", color: "pink" }
+                    ],
+                    mom: [
+                        { 
+                            type: "flight", code: "JX803", airline: "STARLUX", 
+                            dep: { code: "NRT", time: "15:35" }, arr: { code: "TPE", time: "18:45" }, dur: "4h 10m",
+                            seat: "20K", meal: "和風滑蛋厚切豬排丼", bookingRef: "3HEG5I", passenger: "Tung Chia Jung",
+                            manageUrl: "https://www.starlux-airlines.com/zh-TW/booking/manage-my-trip/manage-my-trip"
+                        },
+                        { type: "info", title: "☕ I.A.S.S Lounge -KoCoo-", content: "第二航廈主樓 4F (龍騰卡)", icon: "fas fa-id-card", color: "gray" }
+                    ]
+                }
+            }
+        };
 
-            if(tab === 'brother') {
-                bro.classList.remove('hidden'); mom.classList.add('hidden');
-                btnBro.className = "flex-1 py-2 rounded-lg bg-white shadow-sm font-bold text-indigo-600";
-                btnMom.className = "flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-700";
-            } else {
-                mom.classList.remove('hidden'); bro.classList.add('hidden');
-                btnMom.className = "flex-1 py-2 rounded-lg bg-white shadow-sm font-bold text-pink-600";
-                btnBro.className = "flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-700";
+        // ==========================================
+        // 2. 核心渲染引擎
+        // ==========================================
+        function renderApp(viewId) {
+            const container = document.getElementById('main-container');
+            container.innerHTML = '';
+
+            if (viewId === 'list') { renderPackingList(container); return; }
+            if (viewId === 'budget') { renderBudget(container); return; }
+
+            const dayData = tripData[viewId];
+            if (!dayData) return;
+
+            // 渲染天氣
+            if(dayData.weather) renderWeather(container, dayData.weather);
+
+            // 渲染共用行程
+            if (dayData.items) dayData.items.forEach(item => container.appendChild(createCard(item)));
+
+            // 渲染分頁行程 (如 Day 2, Day 5)
+            if (dayData.tabs) {
+                const tabContainer = document.createElement('div');
+                tabContainer.className = "bg-gray-200 p-1 rounded-xl flex text-sm font-medium mt-4 mb-4";
+                tabContainer.innerHTML = `
+                    <button onclick="switchTab('${viewId}', 'brother')" id="tab-${viewId}-brother" class="tab-btn active flex-1 py-2 rounded-lg transition-all">哥哥</button>
+                    <button onclick="switchTab('${viewId}', 'mom')" id="tab-${viewId}-mom" class="tab-btn flex-1 py-2 rounded-lg text-gray-500 transition-all">媽媽</button>
+                `;
+                container.appendChild(tabContainer);
+
+                const contentDiv = document.createElement('div');
+                contentDiv.id = `tab-content-${viewId}`;
+                container.appendChild(contentDiv);
+                
+                // 預設顯示哥哥
+                renderTabContent(viewId, 'brother', contentDiv);
+            }
+
+            // Day 2 特殊: 混合了 tabs 和 jointItems
+            if(dayData.jointItems) {
+                 dayData.jointItems.forEach(item => container.appendChild(createCard(item)));
             }
         }
 
-        function toggleTabDay5(tab) {
-            const bro = document.getElementById('tab-brother-d5');
-            const mom = document.getElementById('tab-mom-d5');
-            const btnBro = document.querySelector('button[onclick="toggleTabDay5(\'brother\')"]');
-            const btnMom = document.querySelector('button[onclick="toggleTabDay5(\'mom\')"]');
-
-            if(tab === 'brother') {
-                bro.classList.remove('hidden'); mom.classList.add('hidden');
-                btnBro.className = "flex-1 py-2 rounded-lg bg-white shadow-sm font-bold text-indigo-600";
-                btnMom.className = "flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-700";
-            } else {
-                mom.classList.remove('hidden'); bro.classList.add('hidden');
-                btnMom.className = "flex-1 py-2 rounded-lg bg-white shadow-sm font-bold text-pink-600";
-                btnBro.className = "flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-700";
+        function createCard(item) {
+            const div = document.createElement('div');
+            
+            // 根據類型產生 HTML
+            if (item.type === 'transport' || item.type === 'info') {
+                div.className = `glass-card mb-4 ${item.color ? 'border-l-4 border-'+item.color+'-500' : ''}`;
+                div.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <h3 class="font-bold text-gray-800 text-lg">${item.title}</h3>
+                        ${item.time ? `<span class="text-lg font-bold text-${item.color || 'gray'}-600">${item.time}</span>` : `<i class="${item.icon} text-xl text-gray-400"></i>`}
+                    </div>
+                    <div class="text-sm text-gray-500">${item.desc || item.content}</div>
+                    ${item.link ? `<a href="${item.link}" target="_blank" class="mt-2 block text-xs text-${item.color || 'blue'}-500 underline">地圖/連結</a>` : ''}
+                `;
+            } 
+            else if (item.type === 'flight') {
+                div.className = "flight-card rounded-2xl p-5 mb-4 relative overflow-hidden";
+                div.innerHTML = `
+                    <div class="relative z-10">
+                        <div class="flex justify-between mb-4 border-b border-white/20 pb-2"><span class="font-mono text-xl font-bold">${item.code}</span><span class="text-xs bg-white/20 px-2 py-1 rounded">${item.airline}</span></div>
+                        <div class="flex justify-between text-center mb-4"><div><div class="text-3xl font-bold">${item.dep.code}</div><div class="text-xs opacity-70">${item.dep.time}</div></div><div class="text-xs opacity-50 pt-2">${item.dur}<br>✈</div><div><div class="text-3xl font-bold">${item.arr.code}</div><div class="text-xs opacity-70">${item.arr.time}</div></div></div>
+                        <div class="bg-black/20 rounded-xl p-3 mb-3 text-sm space-y-1">
+                            <div class="flex justify-between"><span>💺 Seat</span><span class="font-bold">${item.seat}</span></div>
+                            <div class="flex justify-between"><span>🍴 Meal</span><span class="font-bold text-xs">${item.meal}</span></div>
+                            ${item.drinks ? `<div class="border-t border-white/10 pt-1 mt-1"><span class="text-[10px] opacity-70 block mb-1">🍸 Drinks:</span>${item.drinks.map(d=>`<span class="block text-xs">• ${d}</span>`).join('')}</div>` : ''}
+                        </div>
+                        <div class="bg-[#F8F4E3] text-[#3E3A35] rounded-xl p-3 flex justify-between items-center cursor-pointer active:scale-95 transition" onclick="copyCode('${item.bookingRef}')">
+                            <div><div class="text-[10px] font-bold">BOOKING REF</div><div class="font-mono font-bold">${item.bookingRef}</div><div class="text-[10px]">${item.passenger}</div></div>
+                            <i class="far fa-copy text-xl opacity-50"></i>
+                        </div>
+                        ${item.manageUrl ? `<a href="${item.manageUrl}" target="_blank" class="mt-3 block text-center text-xs border border-white/30 rounded py-2 hover:bg-white/10">行程管理</a>` : ''}
+                    </div>
+                `;
             }
+            else if (item.type === 'bus' || item.type === 'train') {
+                 div.className = item.type === 'bus' ? "bus-card rounded-2xl p-4 mb-4" : "train-card rounded-2xl p-4 mb-4";
+                 div.innerHTML = `
+                    <div class="flex justify-between mb-3 pb-2 border-b border-white/20"><span class="font-bold text-lg"><i class="fas fa-${item.type}"></i> ${item.title}</span></div>
+                    <div class="flex justify-between text-center mb-3">
+                        <div class="text-left">${item.dep}</div><i class="fas fa-arrow-right opacity-50"></i><div class="text-right">${item.arr}</div>
+                    </div>
+                    <div class="bg-black/10 rounded p-2 flex justify-between text-sm">
+                        <span>${item.seat || item.note}</span>
+                        <span>${item.price || ''}</span>
+                    </div>
+                    ${item.link ? `<a href="${item.link}" target="_blank" class="mt-2 block text-center text-xs bg-white/20 py-1 rounded">開啟連結</a>` : ''}
+                 `;
+            }
+            else if (item.type === 'hotel' || item.type === 'snoopy' || item.type === 'spot') {
+                 div.className = item.type === 'snoopy' ? "snoopy-card rounded-2xl p-4 mb-4" : `glass-card mb-4 ${item.color ? 'border-l-4 border-'+item.color+'-500' : ''}`;
+                 if (item.type === 'hotel') div.style.borderLeft = "4px solid #1e40af";
+                 div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div><h3 class="font-bold text-lg text-gray-800">${item.title}</h3><div class="text-xs text-gray-500">${item.desc}</div></div>
+                        ${item.type === 'hotel' ? '<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">Hotel</span>' : ''}
+                         ${item.icon && item.type !== 'hotel' ? `<i class="${item.icon} text-xl text-${item.color || 'gray'}-500"></i>` : ''}
+                    </div>
+                    ${item.bookingRef ? `<div class="mt-2 flex justify-between bg-gray-50 p-2 rounded border border-gray-200 text-sm"><span>Ref: <span class="font-mono font-bold">${item.bookingRef}</span></span><button onclick="copyCode('${item.bookingRef}')"><i class="far fa-copy"></i></button></div>` : ''}
+                    ${item.price ? `<div class="mt-1 text-right text-xs font-bold text-gray-600">${item.price}</div>` : ''}
+                    ${item.link ? `<a href="${item.link}" target="_blank" class="mt-3 block w-full text-center bg-gray-100 text-gray-600 text-xs py-2 rounded hover:bg-gray-200 transition">${item.linkText || '查看位置'}</a>` : ''}
+                 `;
+            }
+            else if (item.type === 'rent') {
+                div.className = "glass-card rent-card mb-4";
+                div.innerHTML = `
+                    <div class="flex justify-between"><h3 class="font-bold text-gray-800">${item.title}</h3><span class="bg-red-600 text-white text-xs px-2 py-1 rounded">${item.car}</span></div>
+                    <div class="bg-gray-50 p-3 rounded mt-2 text-sm space-y-2">
+                         <div class="flex justify-between"><span>取: ${item.pickup}</span><span>還: ${item.return}</span></div>
+                         <div class="flex justify-between items-center pt-2 border-t"><span>預約號: <span class="font-mono font-bold text-red-600">${item.ref}</span></span><button onclick="copyCode('${item.ref}')"><i class="far fa-copy"></i></button></div>
+                         <div class="flex justify-between"><span>費用</span><span>${item.price}</span></div>
+                    </div>
+                    <div class="flex gap-2 mt-2">
+                        <button onclick="copyCode('${item.mapcode}')" class="flex-1 bg-blue-50 text-blue-600 text-xs py-2 rounded">MapCode</button>
+                        <a href="${item.pdf}" target="_blank" class="flex-1 bg-gray-800 text-white text-xs py-2 rounded text-center">PDF</a>
+                    </div>
+                    <a href="${item.link}" target="_blank" class="mt-2 block w-full text-center bg-red-600 text-white text-xs py-2 rounded">導航</a>
+                `;
+            }
+            else if (item.type === 'luger') {
+                div.className = "luger-card rounded-2xl p-5 mb-4 shadow-xl";
+                div.innerHTML = `
+                    <div class="flex justify-between border-b border-[#d4af37]/30 pb-2 mb-3"><span class="text-xs tracking-widest">RESERVATION</span><span class="font-bold text-xl">${item.time}</span></div>
+                    <h2 class="font-serif text-2xl font-bold text-[#f3e5ab] mb-1">${item.title}</h2>
+                    <div class="bg-black/20 p-3 rounded border border-[#d4af37]/20 mb-3">
+                         <div class="flex justify-between items-center"><span>Ref: <span class="font-mono font-bold">${item.bookingRef}</span></span><button onclick="copyCode('${item.bookingRef}')"><i class="far fa-copy"></i></button></div>
+                         <div class="text-xs mt-1 opacity-80">${item.details}</div>
+                    </div>
+                    <div class="text-[10px] bg-[#d4af37]/10 p-2 rounded text-center space-y-1">
+                        <div class="font-bold text-[#d4af37]">MENU NOTE</div>
+                        <div class="grid grid-cols-2 gap-x-4 text-left opacity-80">
+                           <span>• Steak for Two</span><span>• Bacon</span>
+                           <span>• German Potatoes</span><span>• Creamed Spinach</span>
+                        </div>
+                        <div class="pt-1 mt-1 border-t border-[#d4af37]/20 opacity-60">Rare / Medium-Rare / Medium</div>
+                    </div>
+                     <div class="flex gap-2 mt-3">
+                         ${item.manageUrl ? `<a href="${item.manageUrl}" target="_blank" class="flex-1 text-center text-xs border border-[#d4af37]/50 text-[#d4af37] py-2 rounded hover:bg-[#d4af37] hover:text-[#4a0e0e] transition">TableCheck</a>` : ''}
+                         <a href="${item.link}" target="_blank" class="flex-1 text-center text-xs border border-[#d4af37]/50 text-[#d4af37] py-2 rounded hover:bg-[#d4af37] hover:text-[#4a0e0e] transition">Map</a>
+                     </div>
+                `;
+            }
+             else if (item.type === 'sushi') {
+                div.className = "sushi-card rounded-2xl p-5 mb-4 shadow-xl";
+                div.innerHTML = `
+                    <div class="flex justify-between border-b border-[#e6cda3]/30 pb-2 mb-3"><span class="text-xs tracking-widest">RESERVATION</span><span class="font-bold text-xl">${item.time}</span></div>
+                    <h2 class="font-serif text-2xl font-bold text-white mb-1">${item.title}</h2>
+                     <div class="text-xs text-yellow-500 mb-3">★ ${item.rating}</div>
+                    <div class="bg-[#333]/50 p-3 rounded border border-[#e6cda3]/20 mb-3">
+                         <div class="flex justify-between items-center"><span>Ref: <span class="font-mono font-bold">${item.bookingRef}</span></span><button onclick="copyCode('${item.bookingRef}')"><i class="far fa-copy"></i></button></div>
+                         <div class="text-xs mt-1 opacity-80">${item.details}</div>
+                    </div>
+                     <div class="flex gap-2 mt-3">
+                         ${item.manageUrl ? `<a href="${item.manageUrl}" target="_blank" class="flex-1 text-center text-xs border border-[#e6cda3]/50 text-[#e6cda3] py-2 rounded hover:bg-[#e6cda3] hover:text-black transition">TableCheck</a>` : ''}
+                         <a href="${item.link}" target="_blank" class="flex-1 text-center text-xs border border-[#e6cda3]/50 text-[#e6cda3] py-2 rounded hover:bg-[#e6cda3] hover:text-black transition">Map</a>
+                     </div>
+                `;
+            }
+            else if (item.type === 'fuji-forecast') {
+                div.className = "fuji-forecast-card rounded-2xl p-4 mb-4 shadow-lg text-center";
+                div.innerHTML = `
+                    <i class="fas fa-mountain fuji-bg"></i>
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-lg mb-1">富士山能見度</h3>
+                        <span id="fuji-status-badge" class="text-xs bg-white/20 px-2 py-0.5 rounded">Loading...</span>
+                        <div class="flex justify-center gap-2 mt-3">
+                            <a href="https://fuji-san.info/zh-tw/index.html" target="_blank" class="bg-white text-blue-600 text-xs px-3 py-2 rounded font-bold">官方指數</a>
+                            <a href="https://live.fujigoko.tv/?n=3&t=14&b=&u=&e=&c=" target="_blank" class="bg-black/20 text-white text-xs px-3 py-2 rounded">Live Cam</a>
+                        </div>
+                    </div>
+                `;
+            }
+            else if (item.type === 'weather-plan') {
+                div.innerHTML = `
+                    <div class="flex justify-center mb-3 mt-6"><div class="bg-gray-100 p-1 rounded-xl flex text-sm font-bold">
+                        <button onclick="togglePlan('sun')" id="btn-plan-sun" class="weather-toggle-btn active-sun px-4 py-1 rounded-lg">☀️ 晴天</button>
+                        <button onclick="togglePlan('rain')" id="btn-plan-rain" class="weather-toggle-btn px-4 py-1 rounded-lg text-gray-400">☔ 雨天</button>
+                    </div></div>
+                    <div id="plan-sun" class="weather-plan active bg-orange-50 border border-orange-100 rounded-xl p-3 mb-4">
+                        <h4 class="font-bold text-orange-800 text-sm mb-2">絕景攝影</h4>
+                        ${item.sun.map(p => `<div class="flex gap-2 text-sm mb-2"><div class="w-1.5 h-1.5 mt-1.5 rounded-full bg-orange-400 flex-shrink-0"></div><div><div class="font-bold text-gray-700">${p.title}</div><div class="text-xs text-gray-500">${p.desc}</div>${p.link?`<a href="${p.link}" class="text-xs text-orange-500 underline">Map</a>`:''}</div></div>`).join('')}
+                    </div>
+                    <div id="plan-rain" class="weather-plan bg-blue-50 border border-blue-100 rounded-xl p-3 mb-4">
+                        <h4 class="font-bold text-blue-800 text-sm mb-2">藝文與購物</h4>
+                        ${item.rain.map(p => `<div class="flex gap-2 text-sm mb-2"><div class="w-1.5 h-1.5 mt-1.5 rounded-full bg-blue-400 flex-shrink-0"></div><div><div class="font-bold text-gray-700">${p.title}</div><div class="text-xs text-gray-500">${p.desc}</div>${p.link?`<a href="${p.link}" class="text-xs text-blue-500 underline">Map</a>`:''}</div></div>`).join('')}
+                    </div>
+                `;
+            }
+            else if (item.type === 'photo-guide') {
+                 div.className = "bg-gradient-to-r from-amber-50 to-blue-50 border border-gray-200 rounded-xl p-3 mb-4 shadow-sm";
+                 div.innerHTML = `<h3 class="font-bold text-gray-800 text-sm mb-2"><i class="fas fa-lightbulb text-yellow-500"></i> 攝影光線指南</h3><div class="text-xs space-y-1"><div><span class="font-bold text-amber-600">AM:</span> 河口湖、忍野八海</div><div><span class="font-bold text-blue-600">PM:</span> 西湖、本栖湖</div></div>`;
+            }
+            else if (item.type === 'divider') {
+                div.className = "relative py-4";
+                div.innerHTML = `<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-300"></div></div><div class="relative flex justify-center"><span class="bg-slate-50 px-4 text-sm text-gray-500 font-bold">${item.text}</span></div>`;
+            }
+
+            return div;
         }
 
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-content').forEach(el => el.classList.remove('active'));
-            document.getElementById('view-' + pageId).classList.add('active');
+        function renderWeather(container, w) {
+            const div = document.createElement('div');
+            div.className = "weather-widget rounded-xl p-3 flex items-center justify-between mb-4";
+            div.innerHTML = `
+                <div class="flex items-center gap-3"><div class="text-2xl"><i class="${w.icon}"></i></div><div><div class="font-bold text-sm text-gray-800">${w.loc}</div><div class="text-xs text-gray-500">${w.status}</div></div></div>
+                <div class="text-right"><div class="font-bold text-lg text-gray-800">${w.temp}</div></div>
+            `;
+            container.appendChild(div);
+        }
+
+        function renderTabContent(day, role, container) {
+            // 切換按鈕樣式
+            document.getElementById(`tab-${day}-brother`).className = role === 'brother' ? "tab-btn active flex-1 py-2 rounded-lg transition-all font-bold shadow-sm" : "tab-btn flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-700 transition-all";
+            document.getElementById(`tab-${day}-mom`).className = role === 'mom' ? "tab-btn active flex-1 py-2 rounded-lg transition-all font-bold shadow-sm" : "tab-btn flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-700 transition-all";
             
-            document.querySelectorAll('.date-btn').forEach(btn => {
-                btn.classList.remove('active', 'bg-blue-600', 'text-white');
-                if(btn.id === 'btn-list') btn.className = "date-btn flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[70px] whitespace-nowrap bg-red-50 text-red-500";
-                else if(btn.id === 'btn-budget') btn.className = "date-btn flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[70px] whitespace-nowrap bg-green-50 text-green-600";
-                else btn.className = "date-btn bg-gray-100 text-gray-400 flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[60px] whitespace-nowrap";
-            });
-
-            const btn = document.getElementById('btn-' + pageId);
-            if (pageId === 'list') btn.className = "date-btn active bg-red-500 text-white shadow-lg flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[70px] whitespace-nowrap";
-            else if (pageId === 'budget') btn.className = "date-btn active bg-green-600 text-white shadow-lg flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[70px] whitespace-nowrap";
-            else btn.className = "date-btn active bg-blue-600 text-white shadow-lg flex-1 py-2 px-3 rounded-xl text-sm font-bold min-w-[60px] whitespace-nowrap";
-            
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        function copyCode(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const div = document.createElement('div');
-                div.className = "toast-msg bg-black/80 text-white px-4 py-2 rounded-full fixed bottom-10 left-1/2 -translate-x-1/2 text-sm z-50";
-                div.innerHTML = `<i class="fas fa-check mr-2"></i>已複製：${text}`;
-                document.body.appendChild(div);
-                setTimeout(() => div.remove(), 2000);
+            container.innerHTML = '';
+            tripData[day].tabs[role].forEach(item => {
+                container.appendChild(createCard(item));
             });
         }
 
-        // 記帳邏輯
-        function setPay(method) {
-            document.getElementById('bud-card').value = method;
-            document.querySelectorAll('.pay-btn').forEach(b => {
-                b.classList.remove('active', 'bg-green-600', 'text-white');
-                b.classList.add('bg-gray-50');
-                if(b.innerText === method) {
-                    b.classList.remove('bg-gray-50');
-                    b.classList.add('active', 'bg-green-600', 'text-white');
+        // ==========================================
+        // 3. 功能函式 (切換、記帳、清單)
+        // ==========================================
+        function switchDate(viewId) {
+            // 更新按鈕狀態
+            document.querySelectorAll('#date-nav button').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600', 'text-white', 'shadow-lg');
+                if (btn.id === `btn-${viewId}`) {
+                    btn.classList.add('active');
+                    if(viewId === 'list') btn.classList.add('bg-red-500', 'text-white');
+                    else if(viewId === 'budget') btn.classList.add('bg-green-600', 'text-white');
+                    else btn.classList.add('bg-blue-600', 'text-white');
+                } else {
+                     // Reset special buttons
+                     if (btn.id === 'btn-list') { btn.classList.add('bg-red-50', 'text-red-500'); }
+                     else if (btn.id === 'btn-budget') { btn.classList.add('bg-green-50', 'text-green-600'); }
+                     else { btn.classList.add('bg-gray-100', 'text-gray-400'); }
                 }
             });
+
+            renderApp(viewId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function loadExpenses() {
-            const saved = localStorage.getItem('tokyoBudget');
-            const expenses = saved ? JSON.parse(saved) : [];
-            const list = document.getElementById('expense-list');
-            list.innerHTML = '';
-            let totalTwd = 0;
-            let cashJpy = 0;
-
-            expenses.forEach((ex, i) => {
-                const j = parseFloat(ex.j) || 0;
-                const t = parseFloat(ex.t) || 0;
-                const realTwd = t > 0 ? t : Math.round(j * 0.22);
-                totalTwd += realTwd;
-                if(ex.c === '現金' || ex.c === '西瓜卡') cashJpy += j;
-                
-                const div = document.createElement('div');
-                div.className = "bg-white p-3 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center";
-                div.innerHTML = `<div><div class="font-bold text-gray-800">${ex.n}</div><div class="text-xs text-gray-500">${ex.c}</div></div><div class="text-right"><div class="font-bold">¥${ex.j}</div><div class="text-xs text-gray-400">NT$${realTwd}</div></div><button onclick="delExp(${i})" class="ml-3 text-gray-300"><i class="fas fa-trash"></i></button>`;
-                list.appendChild(div);
-            });
-            document.getElementById('total-all-twd').innerText = totalTwd.toLocaleString();
-            document.getElementById('total-cash-jpy').innerText = cashJpy.toLocaleString();
+        function switchTab(day, role) {
+            const container = document.getElementById(`tab-content-${day}`);
+            renderTabContent(day, role, container);
         }
 
-        function addExpense() {
-            const n = document.getElementById('bud-name').value;
-            const j = document.getElementById('bud-jpy').value;
-            const t = document.getElementById('bud-twd').value;
-            const c = document.getElementById('bud-card').value;
-            if(!n) return alert('請輸入項目');
-            const exps = JSON.parse(localStorage.getItem('tokyoBudget')) || [];
-            exps.push({n, j: j||0, t: t||0, c});
-            localStorage.setItem('tokyoBudget', JSON.stringify(exps));
-            document.getElementById('bud-name').value = '';
-            document.getElementById('bud-jpy').value = '';
-            document.getElementById('bud-twd').value = '';
-            loadExpenses();
-        }
-        
-        function delExp(i) {
-            const exps = JSON.parse(localStorage.getItem('tokyoBudget'));
-            exps.splice(i, 1);
-            localStorage.setItem('tokyoBudget', JSON.stringify(exps));
-            loadExpenses();
-        }
-        
-        function autoConvert() {
-            const j = document.getElementById('bud-jpy').value;
-            if(j) document.getElementById('bud-twd').value = Math.round(j * 0.22);
+        function togglePlan(type) {
+            const sun = document.getElementById('plan-sun');
+            const rain = document.getElementById('plan-rain');
+            const btnSun = document.getElementById('btn-plan-sun');
+            const btnRain = document.getElementById('btn-plan-rain');
+
+            if (type === 'sun') {
+                sun.style.display = 'block'; rain.style.display = 'none';
+                btnSun.classList.add('active-sun'); btnSun.classList.remove('text-gray-400');
+                btnRain.classList.remove('active-rain'); btnRain.classList.add('text-gray-400');
+            } else {
+                sun.style.display = 'none'; rain.style.display = 'block';
+                btnRain.classList.add('active-rain'); btnRain.classList.remove('text-gray-400');
+                btnSun.classList.remove('active-sun'); btnSun.classList.add('text-gray-400');
+            }
         }
 
-        // 清單邏輯
+        // --- Packing List ---
         const defaultList = ["護照", "駕照(台/日)", "日幣現金", "Visit Japan Web", "車票/Suica", "Sim卡", "行動電源/線", "相機", "羽絨外套", "發熱衣 x3", "內褲 x3", "襪子 x3", "牙刷/洗面乳", "常備藥"];
-        function loadList() {
+        function renderPackingList(container) {
             const saved = JSON.parse(localStorage.getItem('tokyoList')) || defaultList.map(t => ({text: t, checked: false}));
-            const container = document.getElementById('checklist-container');
-            container.innerHTML = '';
+            
+            const wrapper = document.createElement('div');
+            wrapper.className = "bg-white p-4 rounded-2xl shadow-sm border border-gray-100";
+            wrapper.innerHTML = `
+                <h2 class="font-bold text-lg mb-3 flex items-center gap-2 text-red-500"><i class="fas fa-suitcase"></i> 行李清單</h2>
+                <div class="flex gap-2 mb-4"><input type="text" id="add-item" placeholder="新增..." class="flex-1 border rounded px-3 py-2 text-sm"><button onclick="addListItem()" class="bg-red-500 text-white px-4 rounded"><i class="fas fa-plus"></i></button></div>
+                <div id="list-items" class="space-y-2"></div>
+            `;
+            container.appendChild(wrapper);
+            
+            const listDiv = wrapper.querySelector('#list-items');
             saved.forEach((item, i) => {
                 const row = document.createElement('div');
                 row.className = `check-item flex items-center gap-3 p-2 rounded border ${item.checked ? 'checked bg-gray-50' : 'bg-white'}`;
-                row.onclick = () => { item.checked = !item.checked; localStorage.setItem('tokyoList', JSON.stringify(saved)); loadList(); };
+                row.onclick = () => { item.checked = !item.checked; localStorage.setItem('tokyoList', JSON.stringify(saved)); switchDate('list'); };
                 row.innerHTML = `<div class="w-5 h-5 rounded border flex items-center justify-center ${item.checked ? 'bg-green-500 border-green-500 text-white' : ''}">${item.checked ? '✓' : ''}</div><span class="flex-1 text-sm">${item.text}</span><button onclick="event.stopPropagation(); removeListItem(${i})" class="text-gray-300 px-2">✕</button>`;
-                container.appendChild(row);
+                listDiv.appendChild(row);
             });
         }
-        function addItem() {
-            const val = document.getElementById('newItemInput').value;
+        window.addListItem = () => {
+            const val = document.getElementById('add-item').value;
             if(!val) return;
-            const saved = JSON.parse(localStorage.getItem('tokyoList')) || [];
+            const saved = JSON.parse(localStorage.getItem('tokyoList')) || defaultList.map(t => ({text: t, checked: false}));
             saved.push({text: val, checked: false});
             localStorage.setItem('tokyoList', JSON.stringify(saved));
-            document.getElementById('newItemInput').value = '';
-            loadList();
-        }
-        function removeListItem(i) {
+            switchDate('list');
+        };
+        window.removeListItem = (i) => {
             const saved = JSON.parse(localStorage.getItem('tokyoList'));
             saved.splice(i, 1);
             localStorage.setItem('tokyoList', JSON.stringify(saved));
-            loadList();
+            switchDate('list');
+        };
+
+        // --- Budget ---
+        function renderBudget(container) {
+            const expenses = JSON.parse(localStorage.getItem('tokyoBudget')) || [];
+            let totalJ = 0, totalT = 0;
+            let cashJpy = 0;
+            
+            expenses.forEach(e => { 
+                const j = parseFloat(e.j) || 0;
+                const t = parseFloat(e.t) || 0;
+                // 如果有台幣用台幣，沒有則日幣換算
+                totalT += t > 0 ? t : Math.round(j * 0.22);
+                
+                // 現金與西瓜卡累積日幣
+                if(e.c === '現金' || e.c === '西瓜卡') cashJpy += j;
+            });
+
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = `
+                <div class="bg-gradient-to-r from-green-600 to-emerald-600 p-5 rounded-2xl shadow-lg text-white mb-4">
+                    <div class="flex justify-between items-start">
+                        <div><h3 class="text-xs opacity-80 mb-1">總支出 (約台幣)</h3><div class="text-3xl font-bold">NT$ ${totalT.toLocaleString()}</div></div>
+                        <div class="text-right"><h3 class="text-xs opacity-80 mb-1">現金/西瓜卡</h3><div class="text-xl font-bold">¥ ${cashJpy.toLocaleString()}</div></div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-4">
+                    <h4 class="font-bold text-gray-700 mb-3 text-sm">新增消費</h4>
+                    <div class="space-y-3">
+                        <input id="exp-name" placeholder="消費項目 (如: 晚餐)" class="w-full border rounded-lg px-3 py-2.5 text-sm">
+                        <div class="flex flex-col gap-2">
+                             <input id="exp-j" type="number" placeholder="日幣 ¥" class="w-full border rounded-lg px-3 py-2.5 text-sm" oninput="calcTwd()">
+                             <input id="exp-t" type="number" placeholder="台幣 NT$" class="w-full border rounded-lg px-3 py-2.5 text-sm">
+                        </div>
+                        <div class="flex flex-wrap gap-2" id="pay-opts">
+                             ${['Cube','台新','中信','西瓜卡','現金'].map(m => `<button onclick="setPay('${m}')" class="pay-btn text-xs py-2 rounded-lg bg-gray-50 flex-1">${m}</button>`).join('')}
+                        </div>
+                        <input type="hidden" id="exp-card">
+                        <button onclick="addExp()" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold shadow-md mt-2">加入記帳</button>
+                    </div>
+                </div>
+                <div class="space-y-3 pb-20">
+                    ${expenses.map((e, i) => `
+                        <div class="bg-white p-3 rounded-xl border shadow-sm flex justify-between items-center">
+                            <div><div class="font-bold text-gray-800">${e.n}</div><div class="text-xs text-gray-500">${e.c}</div></div>
+                            <div class="text-right"><div class="font-bold">¥${e.j}</div><div class="text-xs text-gray-400">NT$${e.t}</div></div>
+                            <button onclick="delExp(${i})" class="ml-2 text-gray-300"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            container.appendChild(wrapper);
+            // Default select
+            setPay('現金');
         }
-        function resetList() {
-            if(confirm('重置清單？')) {
-                localStorage.removeItem('tokyoList');
-                loadList();
-            }
+        window.calcTwd = () => { document.getElementById('exp-t').value = Math.round(document.getElementById('exp-j').value * 0.22); };
+        window.setPay = (m) => {
+            document.getElementById('exp-card').value = m;
+            document.querySelectorAll('.pay-btn').forEach(b => {
+                b.classList.remove('active', 'bg-green-600', 'text-white');
+                b.classList.add('bg-gray-50', 'text-gray-500');
+                if(b.innerText === m) {
+                    b.classList.remove('bg-gray-50', 'text-gray-500');
+                    b.classList.add('active', 'bg-green-600', 'text-white');
+                }
+            });
+        };
+        window.addExp = () => {
+            const n = document.getElementById('exp-name').value;
+            const j = document.getElementById('exp-j').value || 0;
+            const t = document.getElementById('exp-t').value || 0;
+            const c = document.getElementById('exp-card').value;
+            if(!n) return;
+            const exps = JSON.parse(localStorage.getItem('tokyoBudget')) || [];
+            exps.push({n, j, t, c});
+            localStorage.setItem('tokyoBudget', JSON.stringify(exps));
+            switchDate('budget');
+        };
+        window.delExp = (i) => {
+            const exps = JSON.parse(localStorage.getItem('tokyoBudget'));
+            exps.splice(i, 1);
+            localStorage.setItem('tokyoBudget', JSON.stringify(exps));
+            switchDate('budget');
+        };
+
+        // Utils
+        function copyCode(text) { navigator.clipboard.writeText(text).then(() => showToast(`已複製：${text}`)); }
+        function showToast(msg) {
+            const div = document.createElement('div');
+            div.className = "toast-msg bg-black/80 text-white px-4 py-2 rounded-full fixed bottom-10 left-1/2 -translate-x-1/2 text-sm z-50";
+            div.innerHTML = `<i class="fas fa-check mr-2"></i>${msg}`;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 2000);
         }
 
         // Init
-        loadExpenses();
-        loadList();
-        setPay('現金');
+        const btnContainer = document.getElementById('date-nav');
+        const dayList = ['list', 'budget', 'day1', 'day2', 'day3', 'day4', 'day5'];
+        
+        dayList.forEach(id => {
+            // HTML already has buttons
+        });
+
+        // Fetch Weather
+        async function initWeather() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=35.49&longitude=138.76&current=cloud_cover');
+                const data = await res.json();
+                const el = document.getElementById('fuji-status-badge');
+                if(el) el.innerText = `${data.current.cloud_cover}% 雲量`;
+            } catch(e){}
+        }
+        initWeather();
+        
+        switchDate('day1'); 
+
     </script>
 </body>
 </html>
